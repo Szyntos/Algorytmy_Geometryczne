@@ -1,0 +1,199 @@
+1e-13
+wlasny_3x3	A	prawa strona	50170
+wlasny_3x3	A	wspolliniowe	0
+wlasny_3x3	A	lewa strona	49830
+wlasny_3x3	B	prawa strona	49994
+wlasny_3x3	B	wspolliniowe	0
+wlasny_3x3	B	lewa strona	50006
+wlasny_3x3	C	prawa strona	479
+wlasny_3x3	C	wspolliniowe	0
+wlasny_3x3	C	lewa strona	521
+wlasny_3x3	D	prawa strona	0
+wlasny_3x3	D	wspolliniowe	1000
+wlasny_3x3	D	lewa strona	0
+wlasny_2x2	A	prawa strona	50170
+wlasny_2x2	A	wspolliniowe	0
+wlasny_2x2	A	lewa strona	49830
+wlasny_2x2	B	prawa strona	49990
+wlasny_2x2	B	wspolliniowe	8
+wlasny_2x2	B	lewa strona	50002
+wlasny_2x2	C	prawa strona	479
+wlasny_2x2	C	wspolliniowe	0
+wlasny_2x2	C	lewa strona	521
+wlasny_2x2	D	prawa strona	136
+wlasny_2x2	D	wspolliniowe	727
+wlasny_2x2	D	lewa strona	137
+np_3x3	A	prawa strona	50170
+np_3x3	A	wspolliniowe	0
+np_3x3	A	lewa strona	49830
+np_3x3	B	prawa strona	49994
+np_3x3	B	wspolliniowe	0
+np_3x3	B	lewa strona	50006
+np_3x3	C	prawa strona	479
+np_3x3	C	wspolliniowe	0
+np_3x3	C	lewa strona	521
+np_3x3	D	prawa strona	0
+np_3x3	D	wspolliniowe	1000
+np_3x3	D	lewa strona	0
+np_2x2	A	prawa strona	50170
+np_2x2	A	wspolliniowe	0
+np_2x2	A	lewa strona	49830
+np_2x2	B	prawa strona	49994
+np_2x2	B	wspolliniowe	0
+np_2x2	B	lewa strona	50006
+np_2x2	C	prawa strona	479
+np_2x2	C	wspolliniowe	0
+np_2x2	C	lewa strona	521
+np_2x2	D	prawa strona	362
+np_2x2	D	wspolliniowe	284
+np_2x2	D	lewa strona	354
+
+1e-14
+wlasny_3x3	A	prawa strona	50170
+wlasny_3x3	A	wspolliniowe	0
+wlasny_3x3	A	lewa strona	49830
+wlasny_3x3	B	prawa strona	49994
+wlasny_3x3	B	wspolliniowe	0
+wlasny_3x3	B	lewa strona	50006
+wlasny_3x3	C	prawa strona	479
+wlasny_3x3	C	wspolliniowe	0
+wlasny_3x3	C	lewa strona	521
+wlasny_3x3	D	prawa strona	0
+wlasny_3x3	D	wspolliniowe	1000
+wlasny_3x3	D	lewa strona	0
+wlasny_2x2	A	prawa strona	50170
+wlasny_2x2	A	wspolliniowe	0
+wlasny_2x2	A	lewa strona	49830
+wlasny_2x2	B	prawa strona	49990
+wlasny_2x2	B	wspolliniowe	8
+wlasny_2x2	B	lewa strona	50002
+wlasny_2x2	C	prawa strona	479
+wlasny_2x2	C	wspolliniowe	0
+wlasny_2x2	C	lewa strona	521
+wlasny_2x2	D	prawa strona	146
+wlasny_2x2	D	wspolliniowe	711
+wlasny_2x2	D	lewa strona	143
+np_3x3	A	prawa strona	50170
+np_3x3	A	wspolliniowe	0
+np_3x3	A	lewa strona	49830
+np_3x3	B	prawa strona	49994
+np_3x3	B	wspolliniowe	0
+np_3x3	B	lewa strona	50006
+np_3x3	C	prawa strona	479
+np_3x3	C	wspolliniowe	0
+np_3x3	C	lewa strona	521
+np_3x3	D	prawa strona	97
+np_3x3	D	wspolliniowe	883
+np_3x3	D	lewa strona	20
+np_2x2	A	prawa strona	50170
+np_2x2	A	wspolliniowe	0
+np_2x2	A	lewa strona	49830
+np_2x2	B	prawa strona	49994
+np_2x2	B	wspolliniowe	0
+np_2x2	B	lewa strona	50006
+np_2x2	C	prawa strona	479
+np_2x2	C	wspolliniowe	0
+np_2x2	C	lewa strona	521
+np_2x2	D	prawa strona	456
+np_2x2	D	wspolliniowe	89
+np_2x2	D	lewa strona	455
+
+1e-15
+wlasny_3x3	A	prawa strona	50170
+wlasny_3x3	A	wspolliniowe	0
+wlasny_3x3	A	lewa strona	49830
+wlasny_3x3	B	prawa strona	49994
+wlasny_3x3	B	wspolliniowe	0
+wlasny_3x3	B	lewa strona	50006
+wlasny_3x3	C	prawa strona	479
+wlasny_3x3	C	wspolliniowe	0
+wlasny_3x3	C	lewa strona	521
+wlasny_3x3	D	prawa strona	361
+wlasny_3x3	D	wspolliniowe	474
+wlasny_3x3	D	lewa strona	165
+wlasny_2x2	A	prawa strona	50170
+wlasny_2x2	A	wspolliniowe	0
+wlasny_2x2	A	lewa strona	49830
+wlasny_2x2	B	prawa strona	49990
+wlasny_2x2	B	wspolliniowe	8
+wlasny_2x2	B	lewa strona	50002
+wlasny_2x2	C	prawa strona	479
+wlasny_2x2	C	wspolliniowe	0
+wlasny_2x2	C	lewa strona	521
+wlasny_2x2	D	prawa strona	149
+wlasny_2x2	D	wspolliniowe	705
+wlasny_2x2	D	lewa strona	146
+np_3x3	A	prawa strona	50170
+np_3x3	A	wspolliniowe	0
+np_3x3	A	lewa strona	49830
+np_3x3	B	prawa strona	49994
+np_3x3	B	wspolliniowe	0
+np_3x3	B	lewa strona	50006
+np_3x3	C	prawa strona	479
+np_3x3	C	wspolliniowe	0
+np_3x3	C	lewa strona	521
+np_3x3	D	prawa strona	383
+np_3x3	D	wspolliniowe	243
+np_3x3	D	lewa strona	374
+np_2x2	A	prawa strona	50170
+np_2x2	A	wspolliniowe	0
+np_2x2	A	lewa strona	49830
+np_2x2	B	prawa strona	49994
+np_2x2	B	wspolliniowe	0
+np_2x2	B	lewa strona	50006
+np_2x2	C	prawa strona	479
+np_2x2	C	wspolliniowe	0
+np_2x2	C	lewa strona	521
+np_2x2	D	prawa strona	491
+np_2x2	D	wspolliniowe	28
+np_2x2	D	lewa strona	481
+
+1e-16
+wlasny_3x3	A	prawa strona	50170
+wlasny_3x3	A	wspolliniowe	0
+wlasny_3x3	A	lewa strona	49830
+wlasny_3x3	B	prawa strona	49994
+wlasny_3x3	B	wspolliniowe	0
+wlasny_3x3	B	lewa strona	50006
+wlasny_3x3	C	prawa strona	479
+wlasny_3x3	C	wspolliniowe	0
+wlasny_3x3	C	lewa strona	521
+wlasny_3x3	D	prawa strona	394
+wlasny_3x3	D	wspolliniowe	428
+wlasny_3x3	D	lewa strona	178
+wlasny_2x2	A	prawa strona	50170
+wlasny_2x2	A	wspolliniowe	0
+wlasny_2x2	A	lewa strona	49830
+wlasny_2x2	B	prawa strona	49990
+wlasny_2x2	B	wspolliniowe	8
+wlasny_2x2	B	lewa strona	50002
+wlasny_2x2	C	prawa strona	479
+wlasny_2x2	C	wspolliniowe	0
+wlasny_2x2	C	lewa strona	521
+wlasny_2x2	D	prawa strona	151
+wlasny_2x2	D	wspolliniowe	701
+wlasny_2x2	D	lewa strona	148
+np_3x3	A	prawa strona	50170
+np_3x3	A	wspolliniowe	0
+np_3x3	A	lewa strona	49830
+np_3x3	B	prawa strona	49994
+np_3x3	B	wspolliniowe	0
+np_3x3	B	lewa strona	50006
+np_3x3	C	prawa strona	479
+np_3x3	C	wspolliniowe	0
+np_3x3	C	lewa strona	521
+np_3x3	D	prawa strona	501
+np_3x3	D	wspolliniowe	38
+np_3x3	D	lewa strona	461
+np_2x2	A	prawa strona	50170
+np_2x2	A	wspolliniowe	0
+np_2x2	A	lewa strona	49830
+np_2x2	B	prawa strona	49994
+np_2x2	B	wspolliniowe	0
+np_2x2	B	lewa strona	50006
+np_2x2	C	prawa strona	479
+np_2x2	C	wspolliniowe	0
+np_2x2	C	lewa strona	521
+np_2x2	D	prawa strona	499
+np_2x2	D	wspolliniowe	11
+np_2x2	D	lewa strona	490

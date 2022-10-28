@@ -1,0 +1,199 @@
+1e-13
+self_3x3	[-1000, 1000] -> 10^5	prawa strona	50170
+self_3x3	[-1000, 1000] -> 10^5	wspolliniowe	0
+self_3x3	[-1000, 1000] -> 10^5	lewa strona	49830
+self_3x3	[-10^14, 10^14] -> 10^5	prawa strona	49994
+self_3x3	[-10^14, 10^14] -> 10^5	wspolliniowe	0
+self_3x3	[-10^14, 10^14] -> 10^5	lewa strona	50006
+self_3x3	Okrag r = 100 -> 10^3	prawa strona	479
+self_3x3	Okrag r = 100 -> 10^3	wspolliniowe	0
+self_3x3	Okrag r = 100 -> 10^3	lewa strona	521
+self_3x3	Linia -> 10^3	prawa strona	0
+self_3x3	Linia -> 10^3	wspolliniowe	1000
+self_3x3	Linia -> 10^3	lewa strona	0
+self_2x2	[-1000, 1000] -> 10^5	prawa strona	50170
+self_2x2	[-1000, 1000] -> 10^5	wspolliniowe	0
+self_2x2	[-1000, 1000] -> 10^5	lewa strona	49830
+self_2x2	[-10^14, 10^14] -> 10^5	prawa strona	49990
+self_2x2	[-10^14, 10^14] -> 10^5	wspolliniowe	8
+self_2x2	[-10^14, 10^14] -> 10^5	lewa strona	50002
+self_2x2	Okrag r = 100 -> 10^3	prawa strona	479
+self_2x2	Okrag r = 100 -> 10^3	wspolliniowe	0
+self_2x2	Okrag r = 100 -> 10^3	lewa strona	521
+self_2x2	Linia -> 10^3	prawa strona	136
+self_2x2	Linia -> 10^3	wspolliniowe	727
+self_2x2	Linia -> 10^3	lewa strona	137
+np_3x3	[-1000, 1000] -> 10^5	prawa strona	50170
+np_3x3	[-1000, 1000] -> 10^5	wspolliniowe	0
+np_3x3	[-1000, 1000] -> 10^5	lewa strona	49830
+np_3x3	[-10^14, 10^14] -> 10^5	prawa strona	49994
+np_3x3	[-10^14, 10^14] -> 10^5	wspolliniowe	0
+np_3x3	[-10^14, 10^14] -> 10^5	lewa strona	50006
+np_3x3	Okrag r = 100 -> 10^3	prawa strona	479
+np_3x3	Okrag r = 100 -> 10^3	wspolliniowe	0
+np_3x3	Okrag r = 100 -> 10^3	lewa strona	521
+np_3x3	Linia -> 10^3	prawa strona	0
+np_3x3	Linia -> 10^3	wspolliniowe	1000
+np_3x3	Linia -> 10^3	lewa strona	0
+np_2x2	[-1000, 1000] -> 10^5	prawa strona	50170
+np_2x2	[-1000, 1000] -> 10^5	wspolliniowe	0
+np_2x2	[-1000, 1000] -> 10^5	lewa strona	49830
+np_2x2	[-10^14, 10^14] -> 10^5	prawa strona	49992
+np_2x2	[-10^14, 10^14] -> 10^5	wspolliniowe	6
+np_2x2	[-10^14, 10^14] -> 10^5	lewa strona	50002
+np_2x2	Okrag r = 100 -> 10^3	prawa strona	479
+np_2x2	Okrag r = 100 -> 10^3	wspolliniowe	0
+np_2x2	Okrag r = 100 -> 10^3	lewa strona	521
+np_2x2	Linia -> 10^3	prawa strona	155
+np_2x2	Linia -> 10^3	wspolliniowe	707
+np_2x2	Linia -> 10^3	lewa strona	138
+
+1e-14
+self_3x3	[-1000, 1000] -> 10^5	prawa strona	50170
+self_3x3	[-1000, 1000] -> 10^5	wspolliniowe	0
+self_3x3	[-1000, 1000] -> 10^5	lewa strona	49830
+self_3x3	[-10^14, 10^14] -> 10^5	prawa strona	49994
+self_3x3	[-10^14, 10^14] -> 10^5	wspolliniowe	0
+self_3x3	[-10^14, 10^14] -> 10^5	lewa strona	50006
+self_3x3	Okrag r = 100 -> 10^3	prawa strona	479
+self_3x3	Okrag r = 100 -> 10^3	wspolliniowe	0
+self_3x3	Okrag r = 100 -> 10^3	lewa strona	521
+self_3x3	Linia -> 10^3	prawa strona	0
+self_3x3	Linia -> 10^3	wspolliniowe	1000
+self_3x3	Linia -> 10^3	lewa strona	0
+self_2x2	[-1000, 1000] -> 10^5	prawa strona	50170
+self_2x2	[-1000, 1000] -> 10^5	wspolliniowe	0
+self_2x2	[-1000, 1000] -> 10^5	lewa strona	49830
+self_2x2	[-10^14, 10^14] -> 10^5	prawa strona	49990
+self_2x2	[-10^14, 10^14] -> 10^5	wspolliniowe	8
+self_2x2	[-10^14, 10^14] -> 10^5	lewa strona	50002
+self_2x2	Okrag r = 100 -> 10^3	prawa strona	479
+self_2x2	Okrag r = 100 -> 10^3	wspolliniowe	0
+self_2x2	Okrag r = 100 -> 10^3	lewa strona	521
+self_2x2	Linia -> 10^3	prawa strona	146
+self_2x2	Linia -> 10^3	wspolliniowe	711
+self_2x2	Linia -> 10^3	lewa strona	143
+np_3x3	[-1000, 1000] -> 10^5	prawa strona	50170
+np_3x3	[-1000, 1000] -> 10^5	wspolliniowe	0
+np_3x3	[-1000, 1000] -> 10^5	lewa strona	49830
+np_3x3	[-10^14, 10^14] -> 10^5	prawa strona	49994
+np_3x3	[-10^14, 10^14] -> 10^5	wspolliniowe	0
+np_3x3	[-10^14, 10^14] -> 10^5	lewa strona	50006
+np_3x3	Okrag r = 100 -> 10^3	prawa strona	479
+np_3x3	Okrag r = 100 -> 10^3	wspolliniowe	0
+np_3x3	Okrag r = 100 -> 10^3	lewa strona	521
+np_3x3	Linia -> 10^3	prawa strona	97
+np_3x3	Linia -> 10^3	wspolliniowe	883
+np_3x3	Linia -> 10^3	lewa strona	20
+np_2x2	[-1000, 1000] -> 10^5	prawa strona	50170
+np_2x2	[-1000, 1000] -> 10^5	wspolliniowe	0
+np_2x2	[-1000, 1000] -> 10^5	lewa strona	49830
+np_2x2	[-10^14, 10^14] -> 10^5	prawa strona	49992
+np_2x2	[-10^14, 10^14] -> 10^5	wspolliniowe	6
+np_2x2	[-10^14, 10^14] -> 10^5	lewa strona	50002
+np_2x2	Okrag r = 100 -> 10^3	prawa strona	479
+np_2x2	Okrag r = 100 -> 10^3	wspolliniowe	0
+np_2x2	Okrag r = 100 -> 10^3	lewa strona	521
+np_2x2	Linia -> 10^3	prawa strona	169
+np_2x2	Linia -> 10^3	wspolliniowe	684
+np_2x2	Linia -> 10^3	lewa strona	147
+
+1e-15
+self_3x3	[-1000, 1000] -> 10^5	prawa strona	50170
+self_3x3	[-1000, 1000] -> 10^5	wspolliniowe	0
+self_3x3	[-1000, 1000] -> 10^5	lewa strona	49830
+self_3x3	[-10^14, 10^14] -> 10^5	prawa strona	49994
+self_3x3	[-10^14, 10^14] -> 10^5	wspolliniowe	0
+self_3x3	[-10^14, 10^14] -> 10^5	lewa strona	50006
+self_3x3	Okrag r = 100 -> 10^3	prawa strona	479
+self_3x3	Okrag r = 100 -> 10^3	wspolliniowe	0
+self_3x3	Okrag r = 100 -> 10^3	lewa strona	521
+self_3x3	Linia -> 10^3	prawa strona	361
+self_3x3	Linia -> 10^3	wspolliniowe	474
+self_3x3	Linia -> 10^3	lewa strona	165
+self_2x2	[-1000, 1000] -> 10^5	prawa strona	50170
+self_2x2	[-1000, 1000] -> 10^5	wspolliniowe	0
+self_2x2	[-1000, 1000] -> 10^5	lewa strona	49830
+self_2x2	[-10^14, 10^14] -> 10^5	prawa strona	49990
+self_2x2	[-10^14, 10^14] -> 10^5	wspolliniowe	8
+self_2x2	[-10^14, 10^14] -> 10^5	lewa strona	50002
+self_2x2	Okrag r = 100 -> 10^3	prawa strona	479
+self_2x2	Okrag r = 100 -> 10^3	wspolliniowe	0
+self_2x2	Okrag r = 100 -> 10^3	lewa strona	521
+self_2x2	Linia -> 10^3	prawa strona	149
+self_2x2	Linia -> 10^3	wspolliniowe	705
+self_2x2	Linia -> 10^3	lewa strona	146
+np_3x3	[-1000, 1000] -> 10^5	prawa strona	50170
+np_3x3	[-1000, 1000] -> 10^5	wspolliniowe	0
+np_3x3	[-1000, 1000] -> 10^5	lewa strona	49830
+np_3x3	[-10^14, 10^14] -> 10^5	prawa strona	49994
+np_3x3	[-10^14, 10^14] -> 10^5	wspolliniowe	0
+np_3x3	[-10^14, 10^14] -> 10^5	lewa strona	50006
+np_3x3	Okrag r = 100 -> 10^3	prawa strona	479
+np_3x3	Okrag r = 100 -> 10^3	wspolliniowe	0
+np_3x3	Okrag r = 100 -> 10^3	lewa strona	521
+np_3x3	Linia -> 10^3	prawa strona	293
+np_3x3	Linia -> 10^3	wspolliniowe	364
+np_3x3	Linia -> 10^3	lewa strona	343
+np_2x2	[-1000, 1000] -> 10^5	prawa strona	50170
+np_2x2	[-1000, 1000] -> 10^5	wspolliniowe	0
+np_2x2	[-1000, 1000] -> 10^5	lewa strona	49830
+np_2x2	[-10^14, 10^14] -> 10^5	prawa strona	49992
+np_2x2	[-10^14, 10^14] -> 10^5	wspolliniowe	6
+np_2x2	[-10^14, 10^14] -> 10^5	lewa strona	50002
+np_2x2	Okrag r = 100 -> 10^3	prawa strona	479
+np_2x2	Okrag r = 100 -> 10^3	wspolliniowe	0
+np_2x2	Okrag r = 100 -> 10^3	lewa strona	521
+np_2x2	Linia -> 10^3	prawa strona	176
+np_2x2	Linia -> 10^3	wspolliniowe	673
+np_2x2	Linia -> 10^3	lewa strona	151
+
+1e-16
+self_3x3	[-1000, 1000] -> 10^5	prawa strona	50170
+self_3x3	[-1000, 1000] -> 10^5	wspolliniowe	0
+self_3x3	[-1000, 1000] -> 10^5	lewa strona	49830
+self_3x3	[-10^14, 10^14] -> 10^5	prawa strona	49994
+self_3x3	[-10^14, 10^14] -> 10^5	wspolliniowe	0
+self_3x3	[-10^14, 10^14] -> 10^5	lewa strona	50006
+self_3x3	Okrag r = 100 -> 10^3	prawa strona	479
+self_3x3	Okrag r = 100 -> 10^3	wspolliniowe	0
+self_3x3	Okrag r = 100 -> 10^3	lewa strona	521
+self_3x3	Linia -> 10^3	prawa strona	394
+self_3x3	Linia -> 10^3	wspolliniowe	428
+self_3x3	Linia -> 10^3	lewa strona	178
+self_2x2	[-1000, 1000] -> 10^5	prawa strona	50170
+self_2x2	[-1000, 1000] -> 10^5	wspolliniowe	0
+self_2x2	[-1000, 1000] -> 10^5	lewa strona	49830
+self_2x2	[-10^14, 10^14] -> 10^5	prawa strona	49990
+self_2x2	[-10^14, 10^14] -> 10^5	wspolliniowe	8
+self_2x2	[-10^14, 10^14] -> 10^5	lewa strona	50002
+self_2x2	Okrag r = 100 -> 10^3	prawa strona	479
+self_2x2	Okrag r = 100 -> 10^3	wspolliniowe	0
+self_2x2	Okrag r = 100 -> 10^3	lewa strona	521
+self_2x2	Linia -> 10^3	prawa strona	151
+self_2x2	Linia -> 10^3	wspolliniowe	701
+self_2x2	Linia -> 10^3	lewa strona	148
+np_3x3	[-1000, 1000] -> 10^5	prawa strona	50170
+np_3x3	[-1000, 1000] -> 10^5	wspolliniowe	0
+np_3x3	[-1000, 1000] -> 10^5	lewa strona	49830
+np_3x3	[-10^14, 10^14] -> 10^5	prawa strona	49994
+np_3x3	[-10^14, 10^14] -> 10^5	wspolliniowe	0
+np_3x3	[-10^14, 10^14] -> 10^5	lewa strona	50006
+np_3x3	Okrag r = 100 -> 10^3	prawa strona	479
+np_3x3	Okrag r = 100 -> 10^3	wspolliniowe	0
+np_3x3	Okrag r = 100 -> 10^3	lewa strona	521
+np_3x3	Linia -> 10^3	prawa strona	319
+np_3x3	Linia -> 10^3	wspolliniowe	297
+np_3x3	Linia -> 10^3	lewa strona	384
+np_2x2	[-1000, 1000] -> 10^5	prawa strona	50170
+np_2x2	[-1000, 1000] -> 10^5	wspolliniowe	0
+np_2x2	[-1000, 1000] -> 10^5	lewa strona	49830
+np_2x2	[-10^14, 10^14] -> 10^5	prawa strona	49992
+np_2x2	[-10^14, 10^14] -> 10^5	wspolliniowe	6
+np_2x2	[-10^14, 10^14] -> 10^5	lewa strona	50002
+np_2x2	Okrag r = 100 -> 10^3	prawa strona	479
+np_2x2	Okrag r = 100 -> 10^3	wspolliniowe	0
+np_2x2	Okrag r = 100 -> 10^3	lewa strona	521
+np_2x2	Linia -> 10^3	prawa strona	177
+np_2x2	Linia -> 10^3	wspolliniowe	668
+np_2x2	Linia -> 10^3	lewa strona	155

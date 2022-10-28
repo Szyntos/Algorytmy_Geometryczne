@@ -1,0 +1,2 @@
+Po uruchomieniu aby przejść do następnych wykresów należy posługiwać się przyciskami "Następny" oraz "Poprzedni".
+Program domyślnie wyświetla wszystkie wykresy dla eps = 10^(-13), aczkolwiek by wyświetlił również inne wykresy należy odkomentować odpowiadające im linie.
