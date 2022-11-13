@@ -1,0 +1,7 @@
+y1 = ax + b
+y2 = cx + d
+ax + b = cx + d
+ax - cx = d - b
+x (a - c) = d - b
+x = (d - b) / (a - c)
+

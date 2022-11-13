@@ -282,7 +282,7 @@ class Plot:
 
 
 
-import random, math, numpy, time, functools, collections
+import random, math, numpy, time_algs, functools, collections
 """Generowanie zbiorow danych"""
 
 
