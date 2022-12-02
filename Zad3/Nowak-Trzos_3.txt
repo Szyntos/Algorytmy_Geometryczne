@@ -1,0 +1,8 @@
+Aby uruchomić algorytm należy udać się na stronę darmowego edytora p5js:
+https://editor.p5js.org/Szyntos/sketches/QVwlHYDza, na której został zamieszczony
+utworzony kod. W lewym górnym rogu znajduje się przycisk „play”, który uruchamia kod.
+Na dole kanwy znajdują się przyciski służące do manipulacji obrazem. Dodawanie nowych
+wielokątów powinno następować w kolejności przeciwnej do ruchu wskazówek zegara.
+Służy do tego przycisk Add_Shape. Kod źródłowy również przesyłam w postaci archiwum
+zip, aczkolwiek nie jest to preferowany sposób uruchamiania programu ze względu na
+przymus zainstalowania biblioteki p5js na komputerze.

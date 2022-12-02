@@ -4,4 +4,11 @@ ax + b = cx + d
 ax - cx = d - b
 x (a - c) = d - b
 x = (d - b) / (a - c)
+y - y1 = [y2−y1/x2−x1](x - x1).
 
+y = [y2−y1/x2−x1](x - x1) + y1
+
+y = [y2−y1/x2−x1] * x - [y2−y1/x2−x1]*x1 + y1
+a = [y2−y1/x2−x1]
+b = -[y2−y1/x2−x1]*x1 + y1
+c = 
