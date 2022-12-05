@@ -82,7 +82,6 @@ class AvlTree extends BinarySearchTree {
           this._count += 1;
         }
       } else {
-        // return
         current.setValue(value);
       }
     };
@@ -91,7 +90,7 @@ class AvlTree extends BinarySearchTree {
       this._root = newNode;
       this._count += 1;
     } else {
-      insertRecursive(this._root, x);
+      insertRecursive(this._root);
     }
 
     return this;
@@ -105,22 +104,21 @@ class AvlTree extends BinarySearchTree {
    * @param {number|string|object} value
    * @return {boolean}
    */
-  remove(value, x=-1) {
-    const removeRecursively = (val, current, x) => {
+  remove(value) {
+    const removeRecursively = (val, current) => {
       if (current === null) {
-        console.log("nicnieusunieto==========")
         return false;
       }
 
-      const compare = this._compare(val, current.getValue(), x);
+      const compare = this._compare(val, current.getValue());
       if (compare < 0) {
-        const removed = removeRecursively(val, current.getLeft(), x);
+        const removed = removeRecursively(val, current.getLeft());
         this._balanceNode(current);
         return removed;
       }
 
       if (compare > 0) {
-        const removed = removeRecursively(val, current.getRight(), x);
+        const removed = removeRecursively(val, current.getRight());
         this._balanceNode(current);
         return removed;
       }
@@ -131,13 +129,12 @@ class AvlTree extends BinarySearchTree {
       if (current.isLeaf()) {
         if (current.isRoot()) {
           this._root = null;
-        } else if (this._compare(val, current.getParent().getValue(), x) < 0) {
+        } else if (this._compare(val, current.getParent().getValue()) < 0) {
           current.getParent().setLeft(null).updateHeight();
         } else {
           current.getParent().setRight(null).updateHeight();
         }
         this._count -= 1;
-        // console.log("usuniento: ", current._value.line, current._value.value)
         return true;
       }
 
@@ -145,14 +142,13 @@ class AvlTree extends BinarySearchTree {
       if (!current.hasRight()) {
         if (current.isRoot()) {
           this._root = current.getLeft();
-        } else if (this._compare(val, current.getParent().getValue(), x) < 0) {
+        } else if (this._compare(val, current.getParent().getValue()) < 0) {
           current.getParent().setLeft(current.getLeft()).updateHeight();
         } else {
           current.getParent().setRight(current.getLeft()).updateHeight();
         }
         current.getLeft().setParent(current.getParent());
         this._count -= 1;
-        // console.log("usuniento: ", current._value.line)
         return true;
       }
 
@@ -160,123 +156,26 @@ class AvlTree extends BinarySearchTree {
       if (!current.hasLeft()) {
         if (current.isRoot()) {
           this._root = current.getRight();
-        } else if (this._compare(val, current.getParent().getValue(), x) < 0) {
+        } else if (this._compare(val, current.getParent().getValue()) < 0) {
           current.getParent().setLeft(current.getRight()).updateHeight();
         } else {
           current.getParent().setRight(current.getRight()).updateHeight();
         }
         current.getRight().setParent(current.getParent());
         this._count -= 1;
-        // console.log("usuniento: ", current._value.line)
         return true;
       }
 
       // case 4: node has left and right children
       const minRight = this.min(current.getRight());
-      const removed = removeRecursively(minRight.getValue(), minRight, x);
+      const removed = removeRecursively(minRight.getValue(), minRight);
       current.setValue(minRight.getValue()).setValue(minRight.getValue());
       this._balanceNode(current);
       return removed;
     };
 
-    return removeRecursively(value, this._root, x);
+    return removeRecursively(value, this._root);
   }
-
-  removeTraversing(value, x=-1) {
-    this.AAAA = false
-    const removeRecursively = (val, current, x) => {
-
-      
-
-      if (current === null) {
-        // console.log("nicnieusunieto==========")
-        return false;
-      }
-
-      // const compare = this._compare(val, current.getValue(), x);
-      // if (compare < 0) {
-      //   const removed = removeRecursively(val, current.getLeft(), x);
-      //   this._balanceNode(current);
-      //   return removed;
-      // }
-
-      // if (compare > 0) {
-      //   const removed = removeRecursively(val, current.getRight(), x);
-      //   this._balanceNode(current);
-      //   return removed;
-      // }
-      // this._balanceNode(current);
-      if (val.line.p1.x == current.getValue().line.p1.x && val.line.p1.y == current.getValue().line.p1.y &&
-      val.line.p2.x == current.getValue().line.p2.x && val.line.p2.y == current.getValue().line.p2.y){
-// current node is the node to remove
-
-      // case 1: node has no children
-      if (current.isLeaf()) {
-        if (current.isRoot()) {
-          this._root = null;
-        } else if (this._compare(val, current.getParent().getValue(), x) < 0) {
-          current.getParent().setLeft(null).updateHeight();
-        } else {
-          current.getParent().setRight(null).updateHeight();
-        }
-        this._count -= 1;
-        // console.log("usuniento: ", current._value.line, current._value.value)
-        return true;
-      }
-
-      // case 2: node has a left child and no right child
-      if (!current.hasRight()) {
-        if (current.isRoot()) {
-          this._root = current.getLeft();
-        } else if (this._compare(val, current.getParent().getValue(), x) < 0) {
-          current.getParent().setLeft(current.getLeft()).updateHeight();
-        } else {
-          current.getParent().setRight(current.getLeft()).updateHeight();
-        }
-        current.getLeft().setParent(current.getParent());
-        this._count -= 1;
-        // console.log("usuniento: ", current._value.line)
-        return true;
-      }
-
-      // case 3: node has a right child and no left child
-      if (!current.hasLeft()) {
-        if (current.isRoot()) {
-          this._root = current.getRight();
-        } else if (this._compare(val, current.getParent().getValue(), x) < 0) {
-          current.getParent().setLeft(current.getRight()).updateHeight();
-        } else {
-          current.getParent().setRight(current.getRight()).updateHeight();
-        }
-        current.getRight().setParent(current.getParent());
-        this._count -= 1;
-        // console.log("usuniento: ", current._value.line)
-        return true;
-      }
-
-      // case 4: node has left and right children
-      const minRight = this.min(current.getRight());
-      const removed = removeRecursively(minRight.getValue(), minRight, x);
-      current.setValue(minRight.getValue()).setValue(minRight.getValue());
-      this._balanceNode(current);
-      return removed;
-      }
-
-      
-    };
-    const traverseRecursive = (val, current, x) => {
-      if (current === null) return false;
-      this.result = removeRecursively(val, current, x)
-      if (this.result){
-        this.AAAA = true
-        console.log("udalosie")
-        // return true
-      }
-      return traverseRecursive(val, current.getLeft(), x) || traverseRecursive(val, current.getRight(), x);
-    };
-    return traverseRecursive(value, this._root, x);
-  }
-
 }
 
 // exports.AvlTree = AvlTree;

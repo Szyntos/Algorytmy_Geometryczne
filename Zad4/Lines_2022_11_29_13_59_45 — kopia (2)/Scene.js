@@ -123,7 +123,6 @@ class PointsCollection {
   }
   draw(strokeW) {
     strokeWeight(strokeW);
-    stroke("rgb(255, 0, 0)")
     for (let i = 0; i < this.pointsArray.length; i++) {
       this.pointsArray[i].draw();
     }
@@ -144,8 +143,6 @@ class PointsCollection {
         this.pointsArray[0].y + 15
       );
     }
-    strokeWeight(default_stroke_weight);
-    stroke(default_stroke)
   }
   drawAsShape(strokeW) {
     strokeWeight(strokeW);
@@ -214,8 +211,8 @@ class LinesCollection {
       // console.log("it doesnt draw")
       // console.log([this.linesArray[i].p1.x, this.linesArray[i].p1.y].join(" "))
       // tmp = [this.linesArray[i].p1.x, this.linesArray[i].p1.y].join(" ");
-      // text([this.linesArray[i].p1.x, this.linesArray[i].p1.y].join(" "), this.linesArray[i].p1.x, this.linesArray[i].p1.y);
-      // text([this.linesArray[i].p2.x, this.linesArray[i].p2.y].join(" "), this.linesArray[i].p2.x, this.linesArray[i].p2.y);
+      text([this.linesArray[i].p1.x, this.linesArray[i].p1.y].join(" "), this.linesArray[i].p1.x, this.linesArray[i].p1.y);
+      text([this.linesArray[i].p2.x, this.linesArray[i].p2.y].join(" "), this.linesArray[i].p2.x, this.linesArray[i].p2.y);
       this.linesArray[i].draw();
     }
   }

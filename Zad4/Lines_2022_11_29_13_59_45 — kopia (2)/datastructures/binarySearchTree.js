@@ -294,28 +294,15 @@ class BinarySearchTree {
     if (typeof cb !== 'function') {
       throw new Error('.traverseInOrder expects a callback function');
     }
-    this.C = 0
-    const traverseRecursive = (current, line, doIreturn) => {
-      if (line != 1 && line != -1){
-        // console.log("rekursja", line.p1.x, line.p1.y, doIreturn)
-      }
-      if (doIreturn) return doIreturn
-      if (current === null) return doIreturn;
-      doIreturn = traverseRecursive(current.getLeft(), line, doIreturn);
-      if (doIreturn){
-        return doIreturn
-      }
-      doIreturn = cb(current, line)
-      if (doIreturn){
-        return doIreturn
-      }
-      doIreturn = traverseRecursive(current.getRight(), line, doIreturn);
-      if (doIreturn){
-        return doIreturn
-      }
+
+    const traverseRecursive = (current) => {
+      if (current === null) return;
+      traverseRecursive(current.getLeft());
+      cb(current, line);
+      traverseRecursive(current.getRight());
     };
 
-    traverseRecursive(this._root, line, this.C);
+    traverseRecursive(this._root);
   }
 
   /**
@@ -323,19 +310,19 @@ class BinarySearchTree {
    * @public
    * @param {function} cb
    */
-  traversePreOrder(cb, line=-1) {
+  traversePreOrder(cb) {
     if (typeof cb !== 'function') {
       throw new Error('.traversePreOrder expects a callback function');
     }
 
-    const traverseRecursive = (current, line) => {
+    const traverseRecursive = (current) => {
       if (current === null) return;
-      cb(current, line);
-      traverseRecursive(current.getLeft(), line);
-      traverseRecursive(current.getRight(), line);
+      cb(current);
+      traverseRecursive(current.getLeft());
+      traverseRecursive(current.getRight());
     };
 
-    traverseRecursive(this._root, line);
+    traverseRecursive(this._root);
   }
 
   /**

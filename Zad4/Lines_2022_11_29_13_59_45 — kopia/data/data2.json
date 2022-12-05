@@ -1,0 +1,41 @@
+{
+    "PC": [],
+    "LC": [],
+    "addedPC": [],
+    "addedLC": [
+      {
+        "linesArray": [
+          {
+            "p1": {
+              "x": 118,
+              "y": 529,
+              "type": null
+            },
+            "p2": {
+              "x": 545,
+              "y": 300,
+              "type": null
+            }
+          },
+          {
+            "p1": {
+              "x": 225,
+              "y": 317,
+              "type": null
+            },
+            "p2": {
+              "x": 503,
+              "y": 449,
+              "type": null
+            }
+          }
+        ],
+        "lineFirstPoint": {
+          "x": 225,
+          "y": 317,
+          "type": null
+        }
+      }
+    ]
+  }
+  

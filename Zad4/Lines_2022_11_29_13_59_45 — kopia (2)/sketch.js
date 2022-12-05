@@ -7,7 +7,7 @@ let but_functions = 0;
 let data = {};
 let lineindex = 0;
 function preload() {
-  file = loadJSON("data/data5.json");
+  file = loadJSON("data/data2.json");
   load = 1
 }
 function setup() {
@@ -17,7 +17,7 @@ function setup() {
   datasetCounter = 0;
   triangulationSwitch = 1;
   frameRate(fr);
-  // noLoop()
+  noLoop()
   createCanvas(w, h);
   create_border(border, 1);
   button_add = createButton("Add_Points");
@@ -93,14 +93,13 @@ function draw_scene(s) {
   }
   for (let i = 0; i < s.getAddedLC().length; i++) {
     drawWhileAddingLines(s.getAddedLC())
-    s.getAddedLC()[i].draw(2);
     // console.log("aaaaleleujsafa")
     if (s.getAddedLC()[i].getArray().length > 1) {
       CheckIntersectionsStupidWay(s.getAddedLC()[i])
-      CheckIntersectionsSweep(s.getAddedLC()[i], sstep).draw(10);
+      CheckIntersectionsSweep(s.getAddedLC()[i], sstep);
     }
 
-    
+    s.getAddedLC()[i].draw(2);
   }
   for (let i = 0; i < s.getLC().length; i++) {
     s.getLC()[i].draw(1);
@@ -113,6 +112,5 @@ function draw() {
   create_border(border, 0);
   draw_scene(scene);
   text(sstep, 100, 100);
-  text(str(mouseX) + ' ' + str(mouseY), 50, 50);
   // sort_mouse_effect(scene)
 }
