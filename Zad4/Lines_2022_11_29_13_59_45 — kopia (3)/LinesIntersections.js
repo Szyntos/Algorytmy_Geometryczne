@@ -250,6 +250,33 @@ function checker(x, l){
 
 }
 
+function linesToKey(l1, l2){
+  if (l1.p1.x > l2.p1.x){
+    ll1 = l1
+    ll2 = l2
+  }else if (l1.p1.x == l2.p1.x){
+    if (l1.p1.y > l2.p1.y){
+      ll1 = l1
+      ll2 = l2
+    }else{
+      ll1 = l2
+      ll2 = l1
+    }
+  }else{
+    ll1 = l2
+    ll2 = l1
+  }
+  a = ll1.p1.x
+  b = ll1.p1.y
+  c = ll1.p2.x
+  d = ll1.p2.y
+  e = ll2.p1.x
+  f = ll2.p1.y
+  g = ll2.p2.x
+  h = ll2.p2.y
+  return str(a) + str(b) + str(c) + str(d) + str(e) + str(f) + str(g) + str(h)
+}
+
 
 function CheckIntersectionsSweep_nw(LC, currentStep) {
   stepByStep = 1
@@ -791,13 +818,15 @@ function CheckIntersectionsSweep_nw_2(LC, currentStep) {
 
 
 
-function CheckIntersectionsSweep(LC, currentStep) {
-  stepByStep = 1
+function CheckIntersectionsSweep(LC, currentStep, stepbystep=1) {
+  stepByStep = stepbystep;
   step = 0
   delta = 0.0000001
   Q = new PriorityQueue(comparatorQueue)
   AddedIntersections = []
-
+  IntersectingLines = []
+  LinesMap = new Map();
+  
   // Pushing endpoints to Queue
   for (i = 0; i < LC.getArray().length; i++) {
     if (LC.getArray()[i].p1.x < LC.getArray()[i].p2.x) {
@@ -823,12 +852,13 @@ function CheckIntersectionsSweep(LC, currentStep) {
     }
 
     step++
-      if (currentStep < step && stepByStep) {
-        showProgress()
-        PC = new PointsCollection()
-        PC.pushArray(AddedIntersections)
-        return PC
-      }
+    if (currentStep < step && stepByStep) {
+      showProgress()
+      PC = new PointsCollection()
+      PC.pushArray(AddedIntersections)
+      
+      return [PC, IntersectingLines]
+    }
 
     if (currentEventType == "start"){
       currentBroomIntersection = BroomIntersection(currentEventLine, currentEventPoint)
@@ -849,6 +879,8 @@ function CheckIntersectionsSweep(LC, currentStep) {
             if (!isInQueue(intersectionPossibility[1])){
               Q.push(new Container_Q(intersectionPossibility[1], [currentEventLine, upperNeighbour.line], "intersection"))
               AddedIntersections.push(intersectionPossibility[1])
+              IntersectingLines.push([currentEventLine, upperNeighbour.line])
+              LinesMap.set(linesToKey(currentEventLine, upperNeighbour.line), linesToKey(currentEventLine, upperNeighbour.line))
             }
             
           }
@@ -864,6 +896,8 @@ function CheckIntersectionsSweep(LC, currentStep) {
             if (!isInQueue(intersectionPossibility[1])){
               Q.push(new Container_Q(intersectionPossibility[1], [currentEventLine, lowerNeighbour.line], "intersection"))
               AddedIntersections.push(intersectionPossibility[1])
+              IntersectingLines.push([currentEventLine, lowerNeighbour.line])
+              LinesMap.set(linesToKey(currentEventLine, lowerNeighbour.line), linesToKey(currentEventLine, lowerNeighbour.line))
             }
             
           }
@@ -895,6 +929,8 @@ function CheckIntersectionsSweep(LC, currentStep) {
             if (!isInQueue(intersectionPossibility[1])){
               Q.push(new Container_Q(intersectionPossibility[1], [lowerNeighbour.line, upperNeighbour.line], "intersection"))
               AddedIntersections.push(intersectionPossibility[1])
+              IntersectingLines.push([lowerNeighbour.line, upperNeighbour.line])
+              LinesMap.set(linesToKey(lowerNeighbour.line, upperNeighbour.line), linesToKey(lowerNeighbour.line, upperNeighbour.line))
             }
             
           }
@@ -979,6 +1015,8 @@ function CheckIntersectionsSweep(LC, currentStep) {
               if (!isInQueue(intersectionPossibility[1])){
                 Q.push(new Container_Q(intersectionPossibility[1], [currentEventLines[0], upperNeighbour.line], "intersection"))
                 AddedIntersections.push(intersectionPossibility[1])
+                IntersectingLines.push([currentEventLines[0], upperNeighbour.line])
+                LinesMap.set(linesToKey(currentEventLines[0], upperNeighbour.line), linesToKey(currentEventLines[0], upperNeighbour.line))
               }
               
             }
@@ -998,6 +1036,8 @@ function CheckIntersectionsSweep(LC, currentStep) {
               if (!isInQueue(intersectionPossibility[1])){
                 Q.push(new Container_Q(intersectionPossibility[1], [currentEventLines[0], lowerNeighbour.line], "intersection"))
                 AddedIntersections.push(intersectionPossibility[1])
+                IntersectingLines.push([currentEventLines[0], lowerNeighbour.line])
+                LinesMap.set(linesToKey(currentEventLines[0], lowerNeighbour.line), linesToKey(currentEventLines[0], lowerNeighbour.line))
               }
               
             }
@@ -1022,6 +1062,8 @@ function CheckIntersectionsSweep(LC, currentStep) {
                 if (!isInQueue(intersectionPossibility[1])){
                   Q.push(new Container_Q(intersectionPossibility[1], [currentEventLines[1], lowerNeighbour.line], "intersection"))
                   AddedIntersections.push(intersectionPossibility[1])
+                  IntersectingLines.push([currentEventLines[1], lowerNeighbour.line])
+                  LinesMap.set(linesToKey(currentEventLines[1], lowerNeighbour.line), linesToKey(currentEventLines[1], lowerNeighbour.line))
                 }
                 
               }
@@ -1041,6 +1083,8 @@ function CheckIntersectionsSweep(LC, currentStep) {
                 if (!isInQueue(intersectionPossibility[1])){
                   Q.push(new Container_Q(intersectionPossibility[1], [currentEventLines[1], upperNeighbour.line], "intersection"))
                   AddedIntersections.push(intersectionPossibility[1])
+                  IntersectingLines.push([currentEventLines[1], upperNeighbour.line])
+                  LinesMap.set(linesToKey(currentEventLines[1], upperNeighbour.line), linesToKey(currentEventLines[1], upperNeighbour.line))
                 }
                 
               }
@@ -1060,8 +1104,93 @@ function CheckIntersectionsSweep(LC, currentStep) {
 
 
     }
+    step++
+    if (currentStep < step && stepByStep) {
+      showProgress()
+      PC = new PointsCollection()
+      PC.pushArray(AddedIntersections)
+      
+      return [PC, IntersectingLines]
+    }
   }
   PC = new PointsCollection()
   PC.pushArray(AddedIntersections)
-  return PC
+  return [PC, IntersectingLines]
+}
+
+
+
+function CheckIntersectionsSweep_CheckOnly(LC) {
+  delta = 0.0000001
+  Q = new PriorityQueue(comparatorQueue)
+  AddedIntersections = []
+
+
+  // Pushing endpoints to Queue
+  for (i = 0; i < LC.getArray().length; i++) {
+    if (LC.getArray()[i].p1.x < LC.getArray()[i].p2.x) {
+      Q.push(new Container_Q(LC.getArray()[i].p1, [LC.getArray()[i]], "start"))
+      Q.push(new Container_Q(LC.getArray()[i].p2, [LC.getArray()[i]], "end"))
+    } else {
+      Q.push(new Container_Q(LC.getArray()[i].p1, [LC.getArray()[i]], "end"))
+      Q.push(new Container_Q(LC.getArray()[i].p2, [LC.getArray()[i]], "start"))
+    }
+  }
+
+  T = new AVLTree(newComparatorT)
+
+  while (!Q.isEmpty()){
+    currentEvent = Q.pop();
+    currentEventPoint = currentEvent.point
+    currentEventLine = currentEvent.lines[0]
+    currentEventType = currentEvent.type
+
+    if (currentEventType == "start"){
+      currentBroomIntersection = BroomIntersection(currentEventLine, currentEventPoint)
+      payload = new newContainer_T(currentEventLine)
+      T.insert(payload, payload, currentEventPoint)
+
+      upperNeighbour = T.next(T.find(payload, currentEventPoint))
+      lowerNeighbour = T.prev(T.find(payload, currentEventPoint))
+
+      if (upperNeighbour != null){
+        upperNeighbour = upperNeighbour.data
+        intersectionPossibility = LineIntersectionCheck(currentEventLine, upperNeighbour.line)
+        if (intersectionPossibility[0]) {
+          return true
+        }
+
+      }
+      if (lowerNeighbour != null){
+        lowerNeighbour = lowerNeighbour.data
+        intersectionPossibility = LineIntersectionCheck(currentEventLine, lowerNeighbour.line)
+        if (intersectionPossibility[0]) {
+          return true
+        }
+
+      }
+
+    }else if (currentEventType == "end"){
+
+      currentBroomIntersection = BroomIntersection(currentEventLine, currentEventPoint)
+      payload = new newContainer_T(currentEventLine)
+
+      upperNeighbour = T.next(T.find(payload, currentEventPoint))
+      lowerNeighbour = T.prev(T.find(payload, currentEventPoint))
+      if (upperNeighbour != null && lowerNeighbour != null){
+        upperNeighbour = upperNeighbour.data
+        lowerNeighbour = lowerNeighbour.data
+        intersectionPossibility = LineIntersectionCheck(lowerNeighbour.line, upperNeighbour.line)
+        if (intersectionPossibility[0]) {
+          return true
+        }
+      }
+      T.remove(payload, currentEventPoint)
+      T.remove(payload, currentEventPoint)
+      T.remove(payload, currentEventPoint)
+    }else if (currentEventType == "intersection"){
+      return true
+    }
+  }
+  return false
 }

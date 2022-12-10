@@ -7,8 +7,17 @@ let but_functions = 0;
 let data = {};
 let lineindex = 0;
 function preload() {
-  file = loadJSON("data/data5.json");
-  load = 1
+  try {
+    file = loadJSON("data/data5.json");
+    load = 1
+  } catch (exceptionVar) {
+    console.log("ERROR")
+    console.log(exceptionVar)
+
+    load = 0
+  } 
+  // load = 0
+  
 }
 function setup() {
   fr = 60;
@@ -16,6 +25,8 @@ function setup() {
   sstep = 0;
   datasetCounter = 0;
   triangulationSwitch = 1;
+  IntersectionCheck = 1;
+  stepbystep = 0;
   frameRate(fr);
   // noLoop()
   createCanvas(w, h);
@@ -52,14 +63,18 @@ function setup() {
   button_spawnDataset_and_clear.mousePressed(spawnDataset_and_clear);
   button_spawnDataset_and_clear.size(w / 10, border);
   textSize(20);
-  button_triangulationSwitch = createButton("Triangulate");
-  button_triangulationSwitch.position((w / 10) * 8, height - border);
-  button_triangulationSwitch.mousePressed(triangulationSwitch_function);
-  button_triangulationSwitch.size(w / 10, border);
+  button_SwitchIntCheck = createButton("SwitchIntCheck");
+  button_SwitchIntCheck.position((w / 10) * 8, height - border);
+  button_SwitchIntCheck.mousePressed(SwitchIntCheck);
+  button_SwitchIntCheck.size(w / 10, border);
   button_step = createButton("stepplus");
   button_step.position((w / 10) * 9, height - border);
   button_step.mousePressed(stepplus);
   button_step.size(w / 10, border);
+  button_animate = createButton("ByStep");
+  button_animate.position((w / 10) * 10, height - border);
+  button_animate.mousePressed(StepSwitch);
+  button_animate.size(w / 10, border);
   textAlign(CENTER, CENTER);
   if (file&& load) {
     scene = new Scene(file);
@@ -96,8 +111,12 @@ function draw_scene(s) {
     s.getAddedLC()[i].draw(2);
     // console.log("aaaaleleujsafa")
     if (s.getAddedLC()[i].getArray().length > 1) {
-      CheckIntersectionsStupidWay(s.getAddedLC()[i])
-      CheckIntersectionsSweep(s.getAddedLC()[i], sstep).draw(10);
+      if (IntersectionCheck){
+        CheckIntersectionsStupidWay(s.getAddedLC()[i])
+      }
+      result = CheckIntersectionsSweep(s.getAddedLC()[i], sstep, stepbystep)
+      result[0].draw(10)
+      text("intersections:  " + str(result[1].length), 100, 15);
     }
 
     

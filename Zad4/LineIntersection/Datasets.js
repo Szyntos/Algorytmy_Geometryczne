@@ -167,3 +167,30 @@ function createDatasets(s, i = 0) {
       break;
   }
 }
+
+function createDatasetLines(s, n){
+  if (n >= w - 2*border - 4){
+    return
+  }
+  s.pushAddedLC(new LinesCollection());
+  for (let i = 0; i < n; i++) {
+    a = Math.floor(Math.random() * (w - border)) + border-1
+    b = Math.floor(Math.random() * (h - border)) + border-1
+    c = Math.floor(Math.random() *(w - border)) + border-1
+    while (a == c){
+      c = Math.floor(Math.random() *( w - border)) + border-1
+    }
+    d = Math.floor(Math.random() * (h + border)) + border-1
+    s.getAddedLC()[s.getAddedLC().length - 1].push(
+      new Point(a, b), new Point(c, d))
+  }
+  arr = s.getAddedLC()[s.getAddedLC().length - 1].getArray()
+  xs = []
+  for (let i = 0; i < n; i++){
+    while (xs.includes(s.getAddedLC()[s.getAddedLC().length - 1].getArray()[i].p1.x)){
+      s.getAddedLC()[s.getAddedLC().length - 1].getArray()[i].p1.x = Math.floor(Math.random() * (w - border)) + border-1
+    }
+    xs.push(s.getAddedLC()[s.getAddedLC().length - 1].getArray()[i].p1.x)
+  }
+
+}

@@ -49,12 +49,20 @@ function debug() {
 }
 function spawnDataset_and_clear() {
   Clear();
-
-  createDatasets(scene, datasetCounter);
+  a = window.prompt("Podaj ilosc linii","Ilosc linii");
+  a = int(a)
+  createDatasetLines(scene, a);
   datasetCounter++;
 }
 function triangulationSwitch_function() {
   triangulationSwitch = (triangulationSwitch + 1) % 2;
+}
+
+function SwitchIntCheck(){
+  IntersectionCheck = (IntersectionCheck + 1) % 2
+}
+function StepSwitch(){
+  stepbystep = (stepbystep + 1) % 2
 }
 function stepplus() {
   sstep++;
