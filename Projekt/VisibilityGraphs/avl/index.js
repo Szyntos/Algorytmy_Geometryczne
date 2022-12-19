@@ -582,6 +582,33 @@ function rotateRight (node) {
     return null;
   }
 
+  findMin (atpoint) {
+    var root = this._root;
+    if (root === null)    return null;
+    if (root.left == null & root.right == null) return root;
+
+    var subtree = root, cmp;
+    var compare = this._comparator;
+    while (subtree) {
+      var l = subtree.left
+      var r = subtree.right
+      if (l != null && r != null){
+        if (compare(l.key, r.key, atpoint) < 0){
+          subtree = subtree.left
+        }else{
+          subtree = subtree.right
+        }
+      }else if (l != null){
+        subtree = subtree.left
+      }else if (r != null){
+        subtree = subtree.right
+      }else{
+        return subtree
+      }
+    }
+    return null;
+  }
+
   /**
    * Insert a node into the tree
    * @param  {Key} key

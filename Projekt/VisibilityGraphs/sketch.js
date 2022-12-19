@@ -29,10 +29,10 @@ function setup() {
   triangulationSwitch = 1;
   IntersectionCheck = 1;
   stepbystep = 0;
-  fromPointIndex = 0;
+  fromPointIndex = 28;
   fromPointFromMouseSwitch = 0;
   frameRate(fr);
-  // noLoop()
+  noLoop()
   createCanvas(w, h);
   create_border(border, 1);
   button_add = createButton("nextPoint");
@@ -149,10 +149,61 @@ function draw_scene(s) {
     if (fromPoint){
       fromPoint.draw("green")
     }
-    resss = visibleVertices(s.getShapes(), fromPoint)
-    resss[0].draw("blue")
-    resss[1].draw("greenalpha")
-    // visibilityGraph(polygonsArray).draw("greenalpha")
+
+
+
+    // SPRAWDZARKA
+    // prawidlowy = visibleVerticesSPRAWDZARKA(s.getShapes(), fromPoint)
+    // prawidlowy[0].draw("blue")
+    // prawidlowy[1].draw("greenalpha")
+    // prawidlowyResult = prawidlowy[0].getArray()
+    // sprawdzany = visibleVertices(s.getShapes(), fromPoint)
+    // sprawdzanyResult = sprawdzany[0].getArray()
+
+    // if (sprawdzanyResult.length > prawidlowyResult.length){
+    //   console.log("Wykrywa za duzo o  " + (sprawdzanyResult.length - prawidlowyResult.length))
+    // }
+    // if (sprawdzanyResult.length < prawidlowyResult.length){
+    //   console.log("Wykrywa za malo o  " + (-(sprawdzanyResult.length - prawidlowyResult.length)))
+    // }
+    // var flag = 0;
+    // for (let i = 0; i < prawidlowyResult.length; i++){
+    //   flag = 0
+    //   for (let j = 0; j < sprawdzanyResult.length; j++){
+    //     if (sprawdzanyResult[j] == prawidlowyResult[i]){
+    //       flag = 1
+    //     }
+    //   }
+    //   if (flag == 0){
+    //     console.log("nie wykrywa")
+    //     prawidlowyResult[i].setType("test")
+    //     // sprawdzanyResult[i].draw(20)
+    //   }
+    // }
+    // var flag = 0;
+    // for (let i = 0; i < sprawdzanyResult.length; i++){
+    //   var flag = 0
+    //   for (let j = 0; j < prawidlowyResult.length; j++){
+    //     if (sprawdzanyResult[i] == prawidlowyResult[j]){
+    //       flag = 1
+    //     }
+    //   }
+    //   if (flag == 0){
+    //     console.log("WYKRYWA " + sprawdzanyResult[i].x + " " + sprawdzanyResult[i].y)
+    //     sprawdzanyResult[i].draw(20)
+    //     console.log(fromPoint.x)
+    //     console.log(fromPoint.y)
+    //   }
+    // }
+
+    // SPRAWDZARKA
+
+
+
+
+
+    // console.log(sprawdzanyResult == prawidlowyResult)
+    visibilityGraph(polygonsArray).draw("greenalpha")
 
   }
   
