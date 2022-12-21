@@ -314,61 +314,6 @@ function comparatorT(a, b, x = -1) {
 // Payload = [polygon, edge, index]
 
 
-
-function orientationChecknw(poly){
-    points = polygon.getPC().getArray()
-    if (points.length < 3){
-        return 0
-    }
-    firstIndex = 0
-    firstPoint = points[0]
-
-    for (let i = 0; i < points.length; i++){
-        if (points[i].y < firstPoint.y){
-            firstPoint = points[i]
-            firstIndex = i
-        }
-    }
-    prevPoint = new Point(firstPoint.x + 1000, firstPoint.y)
-    secondPoint = points[0]
-    secondIndex = 0
-    for (let i = 0; i < points.length; i++){
-        determinant = det(prevPoint, firstPoint, points[i], 1)
-        if (determinant > 0 && !(points[i].x == firstPoint.x && points[i].y == firstPoint.y) ||
-        determinant == 0 && !(points[i].x == firstPoint.x && points[i].y == firstPoint.y) && distance(points[i], firstPoint) < distance(secondPoint, firstPoint)){
-            secondPoint = points[i]
-            secondIndex = i
-        }
-    }
-    prevPoint = secondPoint
-    thirdPoint = points[0]
-    thirdIndex = 0
-    for (let i = 0; i < points.length; i++){
-        determinant = det(prevPoint, secondPoint, points[i], 1)
-        if (determinant > 0 && !(points[i].x == secondPoint.x && points[i].y == secondPoint.y) &&
-         !(points[i].x == firstPoint.x && points[i].y == firstPoint.y)||
-        determinant == 0 && !(points[i].x == secondPoint.x && points[i].y == secondPoint.y) &&
-         !(points[i].x == firstPoint.x && points[i].y == firstPoint.y) &&
-          distance(points[i], secondPoint) < distance(thirdPoint, secondPoint)){
-            thirdPoint = points[i]
-            thirdIndex = i
-        }
-    }
-    
-    // textSize(30)
-    stroke("rgb(0, 0, 0)")
-    text("1", firstPoint.x, firstPoint.y)
-    text("2", secondPoint.x, secondPoint.y)
-    text("3", thirdPoint.x, thirdPoint.y)
-    if ((firstIndex < secondIndex && secondIndex < thirdIndex) ||
-         (thirdIndex < firstIndex && firstIndex < secondIndex) ||
-         (secondIndex < thirdIndex && thirdIndex < firstIndex)){
-            return 1
-         }
-    return -1
-
-}
-
 function orientationCheck(poly){
     points = polygon.getPC().getArray()
     if (points.length < 3){
@@ -377,6 +322,15 @@ function orientationCheck(poly){
     firstIndex = 0
     firstPoint = points[0]
     for (let i = 0; i < points.length; i++){
+        tmp = points[i].getPayload()
+        if (tmp.length < 4){
+            tmp.push(i)
+            points[i].setPayload(tmp)
+        }else{
+            tmp[3] = i
+            points[i].setPayload(tmp)
+        }
+        
         if (points[i].y < firstPoint.y){
             firstPoint = points[i]
             firstIndex = i
@@ -410,11 +364,6 @@ function orientationCheck(poly){
             
     }
     
-    // textSize(30)
-    stroke("rgb(0, 0, 0)")
-    text("1", firstPoint.x, firstPoint.y)
-    text("2", secondPoint.x, secondPoint.y)
-    text("3", thirdPoint.x, thirdPoint.y)
     if ((firstIndex < secondIndex && secondIndex < thirdIndex) ||
          (thirdIndex < firstIndex && firstIndex < secondIndex) ||
          (secondIndex < thirdIndex && thirdIndex < firstIndex)){
@@ -448,27 +397,70 @@ function isPointInsidePolygon(polyIndex, p){
     return true
 }
 
-function intersectsInterior(pivot, broom){
+function intersectsInterior(pivot, broom, orientations){
     if (pivot.payload[0] == broom.p2.payload[0]){
         poly = scene.getShapes()[pivot.payload[0]]
-        edges = poly.getLC().getArray();
-        for (let i = 0; i < edges.length; i++){
-            if ((edges[i].p1.x == broom.p1.x && edges[i].p1.y == broom.p1.y && 
-                edges[i].p2.x == broom.p2.x && edges[i].p2.y == broom.p2.y) ||
-                (edges[i].p1.x == broom.p2.x && edges[i].p1.y == broom.p2.y && 
-                edges[i].p2.x == broom.p1.x && edges[i].p2.y == broom.p1.y)){
-                    return false
-                }
+        points = poly.getPC().getArray();
+        angle = 0
+        if (orientations[pivot.payload[0]] == 0){
+            return false
+        }else if (orientations[pivot.payload[0]] == 1){
+            edge1 = new Line(points[(broom.p2.payload[3]-1+points.length)% points.length], broom.p2)
+            edge2 = new Line(broom.p2, points[(broom.p2.payload[3]+1)% points.length])
+            if (isTheSameLine(edge1, broom) || isTheSameLine(edge2, broom)){
+                return false
+            }
+            angle = det(edge1.p1, broom.p2, edge2.p2, 1)
+        }else{
+            edge1 = new Line(points[(broom.p2.payload[3]+1)% points.length], broom.p2)
+            edge2 = new Line(broom.p2, points[(broom.p2.payload[3]-1+points.length)% points.length])
+            if (isTheSameLine(edge1, broom) || isTheSameLine(edge2, broom)){
+                return false
+            }
+            angle = -det(edge1.p1, broom.p2, edge2.p2, 1)
         }
-        halfpoint = new Point((pivot.x+broom.p2.x)/2, (pivot.y + broom.p2.y)/2)
-        return isPointInsidePolygon(pivot.payload[0], halfpoint)
+        if (det(edge1.p1, edge1.p2, pivot) == 1 && det(edge2.p1, edge2.p2, pivot) == 1){
+            return true
+        }
+        if (det(edge1.p1, edge1.p2, pivot) == -1 && det(edge2.p1, edge2.p2, pivot) == -1){
+            return false
+        }
+        
+        
+        if (angle == 1){
+            return true
+        }
+        if (angle == -1){
+            return false
+        }
+        return false
     }
     return false
+
+
+
+
+    // Stare
+    // if (pivot.payload[0] == broom.p2.payload[0]){
+    //     poly = scene.getShapes()[pivot.payload[0]]
+    //     edges = poly.getLC().getArray();
+    //     for (let i = 0; i < edges.length; i++){
+    //         if ((edges[i].p1.x == broom.p1.x && edges[i].p1.y == broom.p1.y && 
+    //             edges[i].p2.x == broom.p2.x && edges[i].p2.y == broom.p2.y) ||
+    //             (edges[i].p1.x == broom.p2.x && edges[i].p1.y == broom.p2.y && 
+    //             edges[i].p2.x == broom.p1.x && edges[i].p2.y == broom.p1.y)){
+    //                 return false
+    //             }
+    //     }
+    //     halfpoint = new Point((pivot.x+broom.p2.x)/2, (pivot.y + broom.p2.y)/2)
+    //     return isPointInsidePolygon(pivot.payload[0], halfpoint)
+    // }
+    // return false
 }
 
-function visible(broom, checkedPoint, sortedPointsArray, tree, visiblePoints){
+function visible(broom, checkedPoint, sortedPointsArray, tree, visiblePoints, orientations){
     pivot = broom.p1
-    if (intersectsInterior(pivot, broom)){
+    if (intersectsInterior(pivot, broom, orientations)){
         return false
     }else if (checkedPoint.payload[2] == 0 || 
         det(broom.p1, broom.p2, sortedPointsArray[checkedPoint.payload[2]-1], 1) != 0){
@@ -491,7 +483,7 @@ function visible(broom, checkedPoint, sortedPointsArray, tree, visiblePoints){
             return true
         }
     else if (!visiblePoints.has(sortedPointsArray[checkedPoint.payload[2]-1]) ||
-    intersectsInterior(sortedPointsArray[checkedPoint.payload[2]-1], new Line(sortedPointsArray[checkedPoint.payload[2]-1], checkedPoint))){
+    intersectsInterior(sortedPointsArray[checkedPoint.payload[2]-1], new Line(sortedPointsArray[checkedPoint.payload[2]-1], checkedPoint), orientations)){
         return false
     }else{
         edgeFromPreviousPoint = new Line(sortedPointsArray[checkedPoint.payload[2]-1], checkedPoint)
@@ -523,15 +515,15 @@ function visibleVertices(polygonsArray, fromPoint){
             polygonsOrientation.push(orientationCheck(polygon))
 
             points = polygon.getPC().getArray()
-            if (polygonsOrientation[i] == 1){
-                text("CLOCKWISE", points[0].x, points[0].y)
-            }else if (polygonsOrientation[i] == -1){
-                text("COUNTERCLOCKWISE", points[0].x, points[0].y)
-            }else{
-                console.log("ASSSSSSSSSS")
-                text("tuturutuniewiadomo", points[0].x, points[0].y)
-            }
-            console.log()
+            // if (polygonsOrientation[i] == 1){
+            //     text("CLOCKWISE", points[0].x, points[0].y)
+            // }else if (polygonsOrientation[i] == -1){
+            //     text("COUNTERCLOCKWISE", points[0].x, points[0].y)
+            // }else{
+            //     console.log("ASSSSSSSSSS")
+            //     text("tuturutuniewiadomo", points[0].x, points[0].y)
+            // }
+            // console.log()
             
             edges = polygon.getLC().getArray()
             for (let j = 0; j < points.length; j++){
@@ -598,7 +590,7 @@ function visibleVertices(polygonsArray, fromPoint){
             sdasd = 2
         }
         broom = new Line(fromPoint, sortedPointsArray[i])
-        if (visible(broom, sortedPointsArray[i], sortedPointsArray, T, visiblePoints)){
+        if (visible(broom, sortedPointsArray[i], sortedPointsArray, T, visiblePoints, polygonsOrientation)){
             // pokazujemy że dodaliśmy 
             visiblePoints.add(sortedPointsArray[i])
         }
