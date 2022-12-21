@@ -308,9 +308,126 @@ function comparatorT(a, b, x = -1) {
         console.log("nie podano x[origin, broom]")
         return 0
     }
+
 }
 
 // Payload = [polygon, edge, index]
+
+
+
+function orientationChecknw(poly){
+    points = polygon.getPC().getArray()
+    if (points.length < 3){
+        return 0
+    }
+    firstIndex = 0
+    firstPoint = points[0]
+
+    for (let i = 0; i < points.length; i++){
+        if (points[i].y < firstPoint.y){
+            firstPoint = points[i]
+            firstIndex = i
+        }
+    }
+    prevPoint = new Point(firstPoint.x + 1000, firstPoint.y)
+    secondPoint = points[0]
+    secondIndex = 0
+    for (let i = 0; i < points.length; i++){
+        determinant = det(prevPoint, firstPoint, points[i], 1)
+        if (determinant > 0 && !(points[i].x == firstPoint.x && points[i].y == firstPoint.y) ||
+        determinant == 0 && !(points[i].x == firstPoint.x && points[i].y == firstPoint.y) && distance(points[i], firstPoint) < distance(secondPoint, firstPoint)){
+            secondPoint = points[i]
+            secondIndex = i
+        }
+    }
+    prevPoint = secondPoint
+    thirdPoint = points[0]
+    thirdIndex = 0
+    for (let i = 0; i < points.length; i++){
+        determinant = det(prevPoint, secondPoint, points[i], 1)
+        if (determinant > 0 && !(points[i].x == secondPoint.x && points[i].y == secondPoint.y) &&
+         !(points[i].x == firstPoint.x && points[i].y == firstPoint.y)||
+        determinant == 0 && !(points[i].x == secondPoint.x && points[i].y == secondPoint.y) &&
+         !(points[i].x == firstPoint.x && points[i].y == firstPoint.y) &&
+          distance(points[i], secondPoint) < distance(thirdPoint, secondPoint)){
+            thirdPoint = points[i]
+            thirdIndex = i
+        }
+    }
+    
+    // textSize(30)
+    stroke("rgb(0, 0, 0)")
+    text("1", firstPoint.x, firstPoint.y)
+    text("2", secondPoint.x, secondPoint.y)
+    text("3", thirdPoint.x, thirdPoint.y)
+    if ((firstIndex < secondIndex && secondIndex < thirdIndex) ||
+         (thirdIndex < firstIndex && firstIndex < secondIndex) ||
+         (secondIndex < thirdIndex && thirdIndex < firstIndex)){
+            return 1
+         }
+    return -1
+
+}
+
+function orientationCheck(poly){
+    points = polygon.getPC().getArray()
+    if (points.length < 3){
+        return 0
+    }
+    firstIndex = 0
+    firstPoint = points[0]
+    for (let i = 0; i < points.length; i++){
+        if (points[i].y < firstPoint.y){
+            firstPoint = points[i]
+            firstIndex = i
+        }
+    }
+    secondPoint = new Point(firstPoint.x-100, firstPoint.y)
+    secondIndex = 0
+    i = 0
+    for (let i = 0; i < points.length; i++){
+        determinant = det(firstPoint, secondPoint, points[i], 1)
+        if ((determinant < 0 && !(points[i].x == firstPoint.x && points[i].y == firstPoint.y)) ||
+        (determinant == 0 && !(points[i].x == firstPoint.x && points[i].y == firstPoint.y) && 
+            distance(secondPoint, firstPoint) < distance(points[i], firstPoint))){
+            if (!(points[i].x == firstPoint.x && points[i].y == firstPoint.y)){
+                secondPoint = points[i]
+                secondIndex = i
+            }
+        }
+    }
+    a = secondPoint
+    thirdIndex = 0
+    thirdPoint = firstPoint
+    for (let i = 0; i < points.length; i++){
+        determinant = det(secondPoint, thirdPoint, points[i], 1)
+        if ((determinant < 0 && !(points[i].x == secondPoint.x && points[i].y == secondPoint.y)) ||
+         (determinant == 0 && !(points[i].x == secondPoint.x && points[i].y == secondPoint.y) &&
+         (distance(thirdPoint, secondPoint) < distance(points[i], secondPoint)))){
+                thirdPoint = points[i]
+                thirdIndex = i
+             }
+            
+    }
+    
+    // textSize(30)
+    stroke("rgb(0, 0, 0)")
+    text("1", firstPoint.x, firstPoint.y)
+    text("2", secondPoint.x, secondPoint.y)
+    text("3", thirdPoint.x, thirdPoint.y)
+    if ((firstIndex < secondIndex && secondIndex < thirdIndex) ||
+         (thirdIndex < firstIndex && firstIndex < secondIndex) ||
+         (secondIndex < thirdIndex && thirdIndex < firstIndex)){
+            return 1
+         }
+    return -1
+
+}
+
+
+
+
+
 
 function isPointInsidePolygon(polyIndex, p){
     poly = scene.getShapes()[polyIndex]
@@ -392,13 +509,30 @@ function visible(broom, checkedPoint, sortedPointsArray, tree, visiblePoints){
 function visibleVertices(polygonsArray, fromPoint){
 
 
+
+    polygonsOrientation = []
+
     pointsFromPolygons = []
     edgesFromPolygons = []
     for (let i = 0; i < polygonsArray.length; i++){
+
         polygon = polygonsArray[i]
         nextToIndex = 0
         if (polygon.getPC().getArray().length > 1){
+
+            polygonsOrientation.push(orientationCheck(polygon))
+
             points = polygon.getPC().getArray()
+            if (polygonsOrientation[i] == 1){
+                text("CLOCKWISE", points[0].x, points[0].y)
+            }else if (polygonsOrientation[i] == -1){
+                text("COUNTERCLOCKWISE", points[0].x, points[0].y)
+            }else{
+                console.log("ASSSSSSSSSS")
+                text("tuturutuniewiadomo", points[0].x, points[0].y)
+            }
+            console.log()
+            
             edges = polygon.getLC().getArray()
             for (let j = 0; j < points.length; j++){
                 if (points[j]!=fromPoint){
