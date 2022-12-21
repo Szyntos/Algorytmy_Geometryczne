@@ -61,6 +61,10 @@ function fromPointFromMouse() {
   fromPointFromMouseSwitch = (fromPointFromMouseSwitch + 1) % 2;
 }
 
+function computeGraph() {
+  computeGraphSwitch = (computeGraphSwitch + 1)%3
+}
+
 function debug() {
   dddd = (dddd + 1) % 2;
 }

@@ -29,10 +29,11 @@ function setup() {
   triangulationSwitch = 1;
   IntersectionCheck = 1;
   stepbystep = 0;
-  fromPointIndex = 28;
+  fromPointIndex = 7;
   fromPointFromMouseSwitch = 0;
+  computeGraphSwitch = 0;
   frameRate(fr);
-  noLoop()
+  // noLoop()
   createCanvas(w, h);
   create_border(border, 1);
   button_add = createButton("nextPoint");
@@ -79,6 +80,10 @@ function setup() {
   button_animate.position((w / 10) * 10, height - border);
   button_animate.mousePressed(StepSwitch);
   button_animate.size(w / 10, border);
+  button_VisGraph = createButton("ComputeVG");
+  button_VisGraph.position((w / 10) * 11, height - border);
+  button_VisGraph.mousePressed(computeGraph);
+  button_VisGraph.size(w / 10, border);
   textAlign(CENTER, CENTER);
   if (file&& load) {
     scene = new Scene(file);
@@ -135,75 +140,37 @@ function draw_scene(s) {
             }
           }  
       }
-
-
-    if (fromPointFromMouseSwitch){
-      fromPoint = new Point(mouseX, mouseY)
-      fromPoint.setPayload([-1, [-2, -2], -3])
-    }else{
-      fromPoint = allPointsFromShapesArray[fromPointIndex % (allPointsFromShapesArray.length)]
+    if (allPointsFromShapesArray.length > 2){
+      if (computeGraphSwitch == 1){
+        if (s.getAddedLC().length > 0){
+          s.getAddedLC()[0] = visibilityGraph(polygonsArray)
+        }else{
+          s.pushAddedLC(visibilityGraph(polygonsArray))
+          // s.getAddedLC()[0].draw("greenalpha")
+          
+        }
+        computeGraphSwitch++
+      }else if (computeGraphSwitch == 0){
+        if (s.getAddedLC().length > 0){
+          s.getAddedLC()[0] = new LinesCollection();
+        }
+        
+        if (fromPointFromMouseSwitch){
+          fromPoint = new Point(mouseX, mouseY)
+          fromPoint.setPayload([-1, [-2, -2], -3])
+        }else{
+          fromPoint = allPointsFromShapesArray[fromPointIndex % (allPointsFromShapesArray.length)]
+        }
+        if (fromPoint){
+          fromPoint.draw("green")
+        }
+        VV = visibleVertices(s.getShapes(), fromPoint)
+        VV[0].draw("blue")
+        VV[1].draw("greenalpha")
+      }
     }
     
-    // fromPoint = s.getShapes()[0].getPC().getArray()[0]
     
-    if (fromPoint){
-      fromPoint.draw("green")
-    }
-
-
-
-    // SPRAWDZARKA
-    // prawidlowy = visibleVerticesSPRAWDZARKA(s.getShapes(), fromPoint)
-    // prawidlowy[0].draw("blue")
-    // prawidlowy[1].draw("greenalpha")
-    // prawidlowyResult = prawidlowy[0].getArray()
-    // sprawdzany = visibleVertices(s.getShapes(), fromPoint)
-    // sprawdzanyResult = sprawdzany[0].getArray()
-
-    // if (sprawdzanyResult.length > prawidlowyResult.length){
-    //   console.log("Wykrywa za duzo o  " + (sprawdzanyResult.length - prawidlowyResult.length))
-    // }
-    // if (sprawdzanyResult.length < prawidlowyResult.length){
-    //   console.log("Wykrywa za malo o  " + (-(sprawdzanyResult.length - prawidlowyResult.length)))
-    // }
-    // var flag = 0;
-    // for (let i = 0; i < prawidlowyResult.length; i++){
-    //   flag = 0
-    //   for (let j = 0; j < sprawdzanyResult.length; j++){
-    //     if (sprawdzanyResult[j] == prawidlowyResult[i]){
-    //       flag = 1
-    //     }
-    //   }
-    //   if (flag == 0){
-    //     console.log("nie wykrywa")
-    //     prawidlowyResult[i].setType("test")
-    //     // sprawdzanyResult[i].draw(20)
-    //   }
-    // }
-    // var flag = 0;
-    // for (let i = 0; i < sprawdzanyResult.length; i++){
-    //   var flag = 0
-    //   for (let j = 0; j < prawidlowyResult.length; j++){
-    //     if (sprawdzanyResult[i] == prawidlowyResult[j]){
-    //       flag = 1
-    //     }
-    //   }
-    //   if (flag == 0){
-    //     console.log("WYKRYWA " + sprawdzanyResult[i].x + " " + sprawdzanyResult[i].y)
-    //     sprawdzanyResult[i].draw(20)
-    //     console.log(fromPoint.x)
-    //     console.log(fromPoint.y)
-    //   }
-    // }
-
-    // SPRAWDZARKA
-
-
-
-
-
-    // console.log(sprawdzanyResult == prawidlowyResult)
-    visibilityGraph(polygonsArray).draw("greenalpha")
 
   }
   
