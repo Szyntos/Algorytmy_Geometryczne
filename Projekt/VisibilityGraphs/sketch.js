@@ -29,7 +29,7 @@ function setup() {
   triangulationSwitch = 1;
   IntersectionCheck = 1;
   stepbystep = 0;
-  fromPointIndex = 9;
+  fromPointIndex = 9+4;
   fromPointFromMouseSwitch = 0;
   computeGraphSwitch = 0;
   frameRate(fr);

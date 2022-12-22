@@ -405,34 +405,53 @@ function intersectsInterior(pivot, broom, orientations){
         if (orientations[pivot.payload[0]] == 0){
             return false
         }else if (orientations[pivot.payload[0]] == 1){
+            // Clockwise
             edge1 = new Line(points[(broom.p2.payload[3]-1+points.length)% points.length], broom.p2)
             edge2 = new Line(broom.p2, points[(broom.p2.payload[3]+1)% points.length])
             if (isTheSameLine(edge1, broom) || isTheSameLine(edge2, broom)){
                 return false
             }
             angle = det(edge1.p1, broom.p2, edge2.p2, 1)
+            if (det(edge1.p1, edge1.p2, pivot) == 1 && det(edge2.p1, edge2.p2, pivot) == 1){
+                return true
+            }
+            if (det(edge1.p1, edge1.p2, pivot) == -1 && det(edge2.p1, edge2.p2, pivot) == -1){
+                return false
+            }
+            if (angle == 1){
+                return false
+            }
+            if (angle == -1){
+                return true
+            }
         }else{
+            // Counter
             edge1 = new Line(points[(broom.p2.payload[3]+1)% points.length], broom.p2)
             edge2 = new Line(broom.p2, points[(broom.p2.payload[3]-1+points.length)% points.length])
             if (isTheSameLine(edge1, broom) || isTheSameLine(edge2, broom)){
                 return false
             }
             angle = -det(edge1.p1, broom.p2, edge2.p2, 1)
+            if (det(edge1.p1, edge1.p2, pivot) == 1 && det(edge2.p1, edge2.p2, pivot) == 1){
+                return true
+            }
+            if (det(edge1.p1, edge1.p2, pivot) == -1 && det(edge2.p1, edge2.p2, pivot) == -1){
+                return false
+            }
+            if (angle == 1){
+                return true
+            }
+            if (angle == -1){
+                return false
+            }
         }
-        if (det(edge1.p1, edge1.p2, pivot) == 1 && det(edge2.p1, edge2.p2, pivot) == 1){
-            return true
-        }
-        if (det(edge1.p1, edge1.p2, pivot) == -1 && det(edge2.p1, edge2.p2, pivot) == -1){
-            return false
-        }
+        // if (det(edge1.p1, edge1.p2, pivot) == 1 && det(edge2.p1, edge2.p2, pivot) == 1){
+        //     return true
+        // }
+        // if (det(edge1.p1, edge1.p2, pivot) == -1 && det(edge2.p1, edge2.p2, pivot) == -1){
+        //     return false
+        // }
         
-        
-        if (angle == 1){
-            return true
-        }
-        if (angle == -1){
-            return false
-        }
         return false
     }
     return false
@@ -515,15 +534,15 @@ function visibleVertices(polygonsArray, fromPoint){
             polygonsOrientation.push(orientationCheck(polygon))
 
             points = polygon.getPC().getArray()
-            // if (polygonsOrientation[i] == 1){
-            //     text("CLOCKWISE", points[0].x, points[0].y)
-            // }else if (polygonsOrientation[i] == -1){
-            //     text("COUNTERCLOCKWISE", points[0].x, points[0].y)
-            // }else{
-            //     console.log("ASSSSSSSSSS")
-            //     text("tuturutuniewiadomo", points[0].x, points[0].y)
-            // }
-            // console.log()
+            if (polygonsOrientation[i] == 1){
+                text("CLOCKWISE", points[0].x, points[0].y)
+            }else if (polygonsOrientation[i] == -1){
+                text("COUNTERCLOCKWISE", points[0].x, points[0].y)
+            }else{
+                console.log("ASSSSSSSSSS")
+                text("tuturutuniewiadomo", points[0].x, points[0].y)
+            }
+            console.log()
             
             edges = polygon.getLC().getArray()
             for (let j = 0; j < points.length; j++){
