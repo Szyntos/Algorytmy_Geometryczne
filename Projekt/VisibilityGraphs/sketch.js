@@ -29,7 +29,7 @@ function setup() {
   triangulationSwitch = 1;
   IntersectionCheck = 1;
   stepbystep = 0;
-  fromPointIndex = 9+4;
+  fromPointIndex = 9+6;
   fromPointFromMouseSwitch = 0;
   computeGraphSwitch = 0;
   frameRate(fr);
@@ -112,10 +112,7 @@ function draw_scene(s) {
     }
   }
 
-  for (let i = 0; i < s.getAddedLC().length; i++) {
-    drawWhileAddingLines(s.getAddedLC())
-    s.getAddedLC()[i].draw(2);
-  }
+  
 
 
   for (let i = 0; i < s.getLC().length; i++) {
@@ -173,6 +170,10 @@ function draw_scene(s) {
     
 
   }
+  for (let i = 0; i < s.getAddedLC().length; i++) {
+    drawWhileAddingLines(s.getAddedLC())
+    s.getAddedLC()[i].draw("greenalpha");
+  }
   
 }
 
@@ -183,5 +184,6 @@ function draw() {
   draw_scene(scene);
   text(sstep, 100, 100);
   text(str(mouseX) + ' ' + str(mouseY), 50, 50);
+  text(round(frameRate(), 2), 50, 70);
   // sort_mouse_effect(scene)
 }

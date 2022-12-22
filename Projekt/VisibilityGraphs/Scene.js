@@ -196,7 +196,8 @@ class PointsCollection {
     strokeWeight(strokeW);
     // noStroke();
     beginShape();
-    fill("#00F6FF8E");
+    // #00F6FF8E
+    fill("rgba(	0, 246, 255, 0.2)");
     for (let i = 0; i < this.pointsArray.length; i++) {
       this.pointsArray[i].toVertex();
     }
@@ -352,7 +353,8 @@ class Shape {
     stroke(default_stroke)
     strokeWeight(strokeW);
     beginShape();
-    fill("#00F6FF8E");
+    // #00F6FF8E
+    fill("rgba(255, 0, 255, 0.3)");
     for (let i = 0; i < this.PC.getArray().length; i++) {
       this.PC.getArray()[i].toVertex();
     }

@@ -71,10 +71,10 @@ function sortByAngle(points, fromPoint){
         quadrant1firstpoint = quadrant1sorted[0]
     }
     for (let i = 0; i < quadrant1sorted.length; i++){
-        if (det(fromPoint, quadrant1firstpoint, quadrant1sorted[i]) == 1){
+        if (det(fromPoint, quadrant1firstpoint, quadrant1sorted[i], 1) == 1){
             quadrant1firstpoint = quadrant1sorted[i]
         }
-        if (det(fromPoint, quadrant1firstpoint, quadrant1sorted[i]) == 0){
+        if (det(fromPoint, quadrant1firstpoint, quadrant1sorted[i], 1) == 0){
             if (distance(fromPoint, quadrant1sorted[i]) < distance(fromPoint, quadrant1firstpoint)){
                 quadrant1firstpoint = quadrant1sorted[i]
             }
@@ -86,10 +86,10 @@ function sortByAngle(points, fromPoint){
         quadrant2firstpoint = quadrant2sorted[0]
     }
     for (let i = 0; i < quadrant2sorted.length; i++){
-        if (det(fromPoint, quadrant2firstpoint, quadrant2sorted[i]) == 1){
+        if (det(fromPoint, quadrant2firstpoint, quadrant2sorted[i], 1) == 1){
             quadrant2firstpoint = quadrant2sorted[i]
         }
-        if (det(fromPoint, quadrant2firstpoint, quadrant2sorted[i]) == 0){
+        if (det(fromPoint, quadrant2firstpoint, quadrant2sorted[i], 1) == 0){
             if (distance(fromPoint, quadrant2sorted[i]) < distance(fromPoint, quadrant2firstpoint)){
                 quadrant2firstpoint = quadrant2sorted[i]
             }
@@ -101,10 +101,10 @@ function sortByAngle(points, fromPoint){
         quadrant3firstpoint = quadrant3sorted[0]
     }
     for (let i = 0; i < quadrant3sorted.length; i++){
-        if (det(fromPoint, quadrant3firstpoint, quadrant3sorted[i]) == 1){
+        if (det(fromPoint, quadrant3firstpoint, quadrant3sorted[i], 1) == 1){
             quadrant3firstpoint = quadrant3sorted[i]
         }
-        if (det(fromPoint, quadrant3firstpoint, quadrant3sorted[i]) == 0){
+        if (det(fromPoint, quadrant3firstpoint, quadrant3sorted[i], 1) == 0){
             if (distance(fromPoint, quadrant3sorted[i]) < distance(fromPoint, quadrant3firstpoint)){
                 quadrant3firstpoint = quadrant3sorted[i]
             }
@@ -116,10 +116,10 @@ function sortByAngle(points, fromPoint){
         quadrant4firstpoint = quadrant4sorted[0]
     }
     for (let i = 0; i < quadrant4sorted.length; i++){
-        if (det(fromPoint, quadrant4firstpoint, quadrant4sorted[i]) == 1){
+        if (det(fromPoint, quadrant4firstpoint, quadrant4sorted[i], 1) == 1){
             quadrant4firstpoint = quadrant4sorted[i]
         }
-        if (det(fromPoint, quadrant4firstpoint, quadrant4sorted[i]) == 0){
+        if (det(fromPoint, quadrant4firstpoint, quadrant4sorted[i], 1) == 0){
             if (distance(fromPoint, quadrant4sorted[i]) < distance(fromPoint, quadrant4firstpoint)){
                 quadrant4firstpoint = quadrant4sorted[i]
             }
@@ -398,63 +398,153 @@ function isPointInsidePolygon(polyIndex, p){
 }
 
 function intersectsInterior(pivot, broom, orientations){
-    if (pivot.payload[0] == broom.p2.payload[0]){
-        poly = scene.getShapes()[pivot.payload[0]]
-        points = poly.getPC().getArray();
-        angle = 0
-        if (orientations[pivot.payload[0]] == 0){
-            return false
-        }else if (orientations[pivot.payload[0]] == 1){
-            // Clockwise
-            edge1 = new Line(points[(broom.p2.payload[3]-1+points.length)% points.length], broom.p2)
-            edge2 = new Line(broom.p2, points[(broom.p2.payload[3]+1)% points.length])
-            if (isTheSameLine(edge1, broom) || isTheSameLine(edge2, broom)){
-                return false
-            }
-            angle = det(edge1.p1, broom.p2, edge2.p2, 1)
-            if (det(edge1.p1, edge1.p2, pivot) == 1 && det(edge2.p1, edge2.p2, pivot) == 1){
-                return true
-            }
-            if (det(edge1.p1, edge1.p2, pivot) == -1 && det(edge2.p1, edge2.p2, pivot) == -1){
-                return false
-            }
-            if (angle == 1){
-                return false
-            }
-            if (angle == -1){
-                return true
-            }
-        }else{
-            // Counter
-            edge1 = new Line(points[(broom.p2.payload[3]+1)% points.length], broom.p2)
-            edge2 = new Line(broom.p2, points[(broom.p2.payload[3]-1+points.length)% points.length])
-            if (isTheSameLine(edge1, broom) || isTheSameLine(edge2, broom)){
-                return false
-            }
-            angle = -det(edge1.p1, broom.p2, edge2.p2, 1)
-            if (det(edge1.p1, edge1.p2, pivot) == 1 && det(edge2.p1, edge2.p2, pivot) == 1){
-                return true
-            }
-            if (det(edge1.p1, edge1.p2, pivot) == -1 && det(edge2.p1, edge2.p2, pivot) == -1){
-                return false
-            }
-            if (angle == 1){
-                return true
-            }
-            if (angle == -1){
-                return false
-            }
-        }
-        // if (det(edge1.p1, edge1.p2, pivot) == 1 && det(edge2.p1, edge2.p2, pivot) == 1){
-        //     return true
-        // }
-        // if (det(edge1.p1, edge1.p2, pivot) == -1 && det(edge2.p1, edge2.p2, pivot) == -1){
-        //     return false
-        // }
-        
+    poly = scene.getShapes()[pivot.payload[0]]
+    points = poly.getPC().getArray();
+    if (points.length < 3 || scene.getShapes()[broom.p2.payload[0]].getPC().getArray().length < 3){
         return false
     }
+    angle = 0
+    if (orientations[pivot.payload[0]] == 0){
+        return false
+    }else if (orientations[pivot.payload[0]] == 1){
+        // Clockwise
+        edge1 = new Line(points[(broom.p2.payload[3]-1+points.length)% points.length], broom.p2)
+        edge2 = new Line(broom.p2, points[(broom.p2.payload[3]+1)% points.length])
+        if (isTheSameLine(edge1, broom) || isTheSameLine(edge2, broom)){
+            return false
+        }
+        angle = det(edge1.p1, broom.p2, edge2.p2, 1)
+        if (det(edge1.p1, edge1.p2, pivot, 1) == 1 && det(edge2.p1, edge2.p2, pivot, 1) == 1){
+            return true
+        }
+        if (det(edge1.p1, edge1.p2, pivot, 1) == -1 && det(edge2.p1, edge2.p2, pivot, 1) == -1){
+            return false
+        }
+        if (det(edge1.p1, edge1.p2, pivot, 1) * det(edge2.p1, edge2.p2, pivot, 1) == 0){
+            delta = 0.000001
+            p11 = new Point(pivot.x - delta, pivot.y - delta)
+            p12 = new Point(pivot.x + delta, pivot.y - delta)
+            p13 = new Point(pivot.x - delta, pivot.y + delta)
+            p14 = new Point(pivot.x + delta, pivot.y + delta)
+            p11.setPayload(pivot.payload)
+            p12.setPayload(pivot.payload)
+            p13.setPayload(pivot.payload)
+            p14.setPayload(pivot.payload)
+            broom1 = new Line(p11, broom.p2)
+            broom2 = new Line(p12, broom.p2)
+            broom3 = new Line(p13, broom.p2)
+            broom4 = new Line(p14, broom.p2)
+            det1 = det(broom.p1, broom.p2, p11, 1)
+            det2 = det(broom.p1, broom.p2, p12, 1)
+            det3 = det(broom.p1, broom.p2, p13, 1)
+            det4 = det(broom.p1, broom.p2, p14, 1)
+            res1 = null
+            res2 = null
+            res3 = null
+            res4 = null
+            ans = []
+            if (det1 != 0){
+                res1 = intersectsInterior(p11, broom1, orientations)
+                ans.push(res1)
+            }
+            if (det2 != 0){
+                res2 = intersectsInterior(p12, broom2, orientations)
+                ans.push(res2)
+            }
+            if (det3 != 0){
+                res3 = intersectsInterior(p13, broom3, orientations)
+                ans.push(res3)
+            }
+            if (det4 != 0){
+                res4 = intersectsInterior(p14, broom4, orientations)
+                ans.push(res4)
+            }
+            if (ans[0] == ans[1]){
+                return ans[0]
+            }
+            return false
+
+        }
+        if (angle == 1){
+            return false
+        }
+        if (angle == -1){
+            return true
+        }
+    }else{
+        // Counter
+        edge1 = new Line(points[(broom.p2.payload[3]+1)% points.length], broom.p2)
+        edge2 = new Line(broom.p2, points[(broom.p2.payload[3]-1+points.length)% points.length])
+        if (isTheSameLine(edge1, broom) || isTheSameLine(edge2, broom)){
+            return false
+        }
+        angle = -det(edge1.p1, broom.p2, edge2.p2, 1)
+        if (det(edge1.p1, edge1.p2, pivot, 1) == 1 && det(edge2.p1, edge2.p2, pivot, 1) == 1){
+            return true
+        }
+        if (det(edge1.p1, edge1.p2, pivot, 1) == -1 && det(edge2.p1, edge2.p2, pivot, 1) == -1){
+            return false
+        }
+        if (det(edge1.p1, edge1.p2, pivot, 1) * det(edge2.p1, edge2.p2, pivot, 1) == 0){
+            delta = 0.000001
+            p11 = new Point(pivot.x - delta, pivot.y - delta)
+            p12 = new Point(pivot.x + delta, pivot.y - delta)
+            p13 = new Point(pivot.x - delta, pivot.y + delta)
+            p14 = new Point(pivot.x + delta, pivot.y + delta)
+            p11.setPayload(pivot.payload)
+            p12.setPayload(pivot.payload)
+            p13.setPayload(pivot.payload)
+            p14.setPayload(pivot.payload)
+            broom1 = new Line(p11, broom.p2)
+            broom2 = new Line(p12, broom.p2)
+            broom3 = new Line(p13, broom.p2)
+            broom4 = new Line(p14, broom.p2)
+            det1 = det(broom.p1, broom.p2, p11, 1)
+            det2 = det(broom.p1, broom.p2, p12, 1)
+            det3 = det(broom.p1, broom.p2, p13, 1)
+            det4 = det(broom.p1, broom.p2, p14, 1)
+            res1 = null
+            res2 = null
+            res3 = null
+            res4 = null
+            ans = []
+            if (det1 != 0){
+                res1 = intersectsInterior(p11, broom1, orientations)
+                ans.push(res1)
+            }
+            if (det2 != 0){
+                res2 = intersectsInterior(p12, broom2, orientations)
+                ans.push(res2)
+            }
+            if (det3 != 0){
+                res3 = intersectsInterior(p13, broom3, orientations)
+                ans.push(res3)
+            }
+            if (det4 != 0){
+                res4 = intersectsInterior(p14, broom4, orientations)
+                ans.push(res4)
+            }
+            if (ans[0] == ans[1]){
+                return ans[0]
+            }
+            return false
+        }
+        if (angle == 1){
+            return true
+        }
+        if (angle == -1){
+            return false
+        }
+    }
+    // if (det(edge1.p1, edge1.p2, pivot, 1) == 1 && det(edge2.p1, edge2.p2, pivot, 1) == 1){
+    //     return true
+    // }
+    // if (det(edge1.p1, edge1.p2, pivot, 1) == -1 && det(edge2.p1, edge2.p2, pivot, 1) == -1){
+    //     return false
+    // }
+    
     return false
+
 
 
 
@@ -558,19 +648,19 @@ function visibleVertices(polygonsArray, fromPoint){
         }
     }
 
-    for (let i = 0; i < pointsFromPolygons.length; i++){
-        flag = 0
-        for (let j = 0; j < pointsFromPolygons.length; j++){
-            if (pointsFromPolygons[i].x == pointsFromPolygons[j].x && pointsFromPolygons[i].y == pointsFromPolygons[j].y){
-                flag++
-            }
-        }
-        if (flag > 1){
-            console.log("ten sam punkt")
-            console.log(pointsFromPolygons[i].x)
-            console.log(pointsFromPolygons[i].y)
-        }
-    }
+    // for (let i = 0; i < pointsFromPolygons.length; i++){
+    //     flag = 0
+    //     for (let j = 0; j < pointsFromPolygons.length; j++){
+    //         if (pointsFromPolygons[i].x == pointsFromPolygons[j].x && pointsFromPolygons[i].y == pointsFromPolygons[j].y){
+    //             flag++
+    //         }
+    //     }
+    //     if (flag > 1){
+    //         console.log("ten sam punkt")
+    //         console.log(pointsFromPolygons[i].x)
+    //         console.log(pointsFromPolygons[i].y)
+    //     }
+    // }
     pointNextToFromPoint = pointsFromPolygons[nextToIndex]
 
 // pokazujemy wszystkie punkty wielokątów
@@ -582,20 +672,26 @@ function visibleVertices(polygonsArray, fromPoint){
     }
 
     // piszemy numerki przed posortowaniem
-    // for (let i = 0; i < sortedPointsArray.length; i++){
-    //     text(i, sortedPointsArray[i].x, sortedPointsArray[i].y + 15);
-    // }
+    for (let i = 0; i < sortedPointsArray.length; i++){
+        text(i, sortedPointsArray[i].x, sortedPointsArray[i].y + 15);
+    }
     // piszemy numerki po posortowaniu
     // numerki znikają 
     T = new AVLTree(comparatorT)
     visiblePoints = new Set()
     broom = new Line(fromPoint, sortedPointsArray[0])
     nextIndex = 0
+    infiniteLoopCheck = 0
     newBroom = new Line(fromPoint, sortedPointsArray[(nextIndex)%sortedPointsArray.length])
     while (det(broom.p1, broom.p2, newBroom.p2, 1) == 0){
+        if (infiniteLoopCheck > sortedPointsArray.length + 2){
+            break
+        }
+        infiniteLoopCheck++
         nextIndex++
         newBroom = new Line(fromPoint, sortedPointsArray[(nextIndex)%sortedPointsArray.length])
     }
+    
     // pokazujemy pierwszą miotłe
     for (let i = 0; i < edgesFromPolygons.length; i++){
         if (BroomIntersection(edgesFromPolygons[i], broom)[0]){
@@ -605,7 +701,7 @@ function visibleVertices(polygonsArray, fromPoint){
     // pokazujemy rzeczy znalezione na miotle
     for (let i = 0; i < sortedPointsArray.length; i++){
         // CAŁY CZAS STAN DRZEWA WYŚWIETLONY
-        if (i == 11){
+        if (i == 2){
             sdasd = 2
         }
         broom = new Line(fromPoint, sortedPointsArray[i])
@@ -614,8 +710,13 @@ function visibleVertices(polygonsArray, fromPoint){
             visiblePoints.add(sortedPointsArray[i])
         }
         nextIndex = i+1
+        infiniteLoopCheck = 0
         newBroom = new Line(fromPoint, sortedPointsArray[(nextIndex)%sortedPointsArray.length])
         while (det(broom.p1, broom.p2, newBroom.p2, 1) == 0){
+            if (infiniteLoopCheck > sortedPointsArray.length + 2){
+                break
+            }
+            infiniteLoopCheck++
             nextIndex++
             newBroom = new Line(fromPoint, sortedPointsArray[(nextIndex)%sortedPointsArray.length])
         }
@@ -624,6 +725,10 @@ function visibleVertices(polygonsArray, fromPoint){
         prevIndex = i-1
         prevBroom = new Line(fromPoint, sortedPointsArray[(i-1+sortedPointsArray.length)%sortedPointsArray.length])
         while (det(broom.p1, broom.p2, prevBroom.p2, 1) == 0){
+            if (infiniteLoopCheck > sortedPointsArray.length + 2){
+                break
+            }
+            infiniteLoopCheck++
             prevIndex++
             prevBroom = new Line(fromPoint, sortedPointsArray[(prevIndex+sortedPointsArray.length)%sortedPointsArray.length])
         }
