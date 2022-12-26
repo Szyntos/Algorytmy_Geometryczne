@@ -76,7 +76,7 @@ function setup() {
   button_step.position((w / 10) * 9, height - border);
   button_step.mousePressed(stepplus);
   button_step.size(w / 10, border);
-  button_animate = createButton("ByStep");
+  button_animate = createButton("Animate");
   button_animate.position((w / 10) * 10, height - border);
   button_animate.mousePressed(StepSwitch);
   button_animate.size(w / 10, border);
@@ -161,7 +161,12 @@ function draw_scene(s) {
         if (fromPoint){
           fromPoint.draw("green")
         }
-        VV = visibleVertices(s.getShapes(), fromPoint)
+        if (stepbystep){
+          VV = visibleVertices(s.getShapes(), fromPoint, 1, sstep)
+        }else{
+          VV = visibleVertices(s.getShapes(), fromPoint)
+        }
+        
         VV[0].draw("blue")
         VV[1].draw("greenalpha")
       }

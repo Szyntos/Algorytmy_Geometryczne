@@ -8,7 +8,7 @@ class Point {
   draw(size=0) {
     if (size == "green"){
       stroke("rgba(0,204,0, 0.7)");
-      strokeWeight(15);
+      strokeWeight(10);
       point(this.x, this.y);
       stroke(default_stroke);
       strokeWeight(default_stroke_weight);
@@ -16,7 +16,31 @@ class Point {
     }
     if (size == "blue"){
       stroke("rgba(0,0,204, 0.7)");
-      strokeWeight(15);
+      strokeWeight(10);
+      point(this.x, this.y);
+      stroke(default_stroke);
+      strokeWeight(default_stroke_weight);
+      return
+    }
+    if (size == "animation"){
+      stroke("rgba(0,150,204, 0.5)");
+      strokeWeight(20);
+      point(this.x, this.y);
+      stroke(default_stroke);
+      strokeWeight(default_stroke_weight);
+      return
+    }
+    if (size == "visible"){
+      stroke("rgba(200,0,0, 0.9)");
+      strokeWeight(20);
+      point(this.x, this.y);
+      stroke(default_stroke);
+      strokeWeight(default_stroke_weight);
+      return
+    }
+    if (size == "intersection"){
+      stroke("rgb(0,130,0)");
+      strokeWeight(20);
       point(this.x, this.y);
       stroke(default_stroke);
       strokeWeight(default_stroke_weight);
@@ -119,7 +143,31 @@ class Line {
     this.p1 = p1;
     this.p2 = p2;
   }
-  draw() {
+  draw(size = 0) {
+    if (size == "animation"){
+      stroke("rgba(0,150,204, 0.7)");
+      strokeWeight(5);
+      line(this.p1.x, this.p1.y, this.p2.x, this.p2.y);
+      stroke(default_stroke);
+      strokeWeight(default_stroke_weight);
+      return
+    }
+    if (size == "intersectingEdge"){
+      stroke("rgba(150,130,130, 0.5)");
+      strokeWeight(10);
+      line(this.p1.x, this.p1.y, this.p2.x, this.p2.y);
+      stroke(default_stroke);
+      strokeWeight(default_stroke_weight);
+      return
+    }
+    if (size == "minimalEdge"){
+      stroke("rgba(200,0,0, 0.7)");
+      strokeWeight(10);
+      line(this.p1.x, this.p1.y, this.p2.x, this.p2.y);
+      stroke(default_stroke);
+      strokeWeight(default_stroke_weight);
+      return
+    }
     line(this.p1.x, this.p1.y, this.p2.x, this.p2.y);
   }
 }
@@ -164,6 +212,7 @@ class PointsCollection {
       }
       return
     }
+    
     strokeWeight(strokeW);
     stroke("rgb(255, 0, 0)")
     for (let i = 0; i < this.pointsArray.length; i++) {
@@ -273,7 +322,13 @@ class LinesCollection {
       for (let i = 0; i < this.linesArray.length; i++) {
         this.linesArray[i].draw();
       }
-    }else{
+    }else if (strokeW == "animation"){
+      strokeWeight(5);
+      stroke("rgba(0,204,209, 0.5)")
+      for (let i = 0; i < this.linesArray.length; i++) {
+        this.linesArray[i].draw();
+      }
+    }else {
       strokeWeight(strokeW);
       for (let i = 0; i < this.linesArray.length; i++) {
         this.linesArray[i].draw();
