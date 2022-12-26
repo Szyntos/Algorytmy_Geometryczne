@@ -617,6 +617,10 @@ function visible(broom, checkedPoint, sortedPointsArray, tree, visiblePoints, or
             if (potentialEdge != null){
                 step ++
                 if (currentStep < step && animate){
+                    edges = T.values()
+                    for (let i = 0; i < edges.length; i++){
+                        edges[i].draw("intersectingEdge")
+                    }
                     potentialEdge.draw("minimalEdge")
                     broom.draw("animation")
                     array = Array.from(visiblePoints)
@@ -631,6 +635,10 @@ function visible(broom, checkedPoint, sortedPointsArray, tree, visiblePoints, or
                 if (LineIntersection(potentialEdge, broom, "checkBoundaries")[0]){
                     step ++
                     if (currentStep < step && animate){
+                        edges = T.values()
+                        for (let i = 0; i < edges.length; i++){
+                            edges[i].draw("intersectingEdge")
+                        }
                         LineIntersectionThatOutputsPoint(potentialEdge, broom).draw("intersection")
                         potentialEdge.draw("minimalEdge")
                         broom.draw("animation")
