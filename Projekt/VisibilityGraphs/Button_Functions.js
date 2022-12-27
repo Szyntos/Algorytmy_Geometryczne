@@ -88,9 +88,17 @@ function SwitchIntCheck() {
 function StepSwitch() {
   stepbystep = (stepbystep + 1) % 2
 }
+function StepSwitchGraph() {
+  stepbystepgraph = (stepbystepgraph + 1) % 3
+}
 
 function stepplus() {
   sstep++;
+  graphanimationswitch = 1
+}
+function stepminus() {
+  sstep--;
+  graphanimationswitch = 1
 }
 
 function drawWhileAddingLines(LC_arr) {

@@ -972,7 +972,8 @@ function visibleVertices(polygonsArray, fromPoint, animate = 0, currentStep = 0)
 }
 
 
-function visibilityGraph(polygonsArray){
+function visibilityGraph(polygonsArray, animate = 0, currentStep = 0){
+    step = 0
     allPointsFromShapesArray = []
     for (let i = 0; i < polygonsArray.length; i++){
         polygon = polygonsArray[i]
@@ -986,6 +987,10 @@ function visibilityGraph(polygonsArray){
     graph = []
     graphLC = new LinesCollection()
     for (let i = 0; i < allPointsFromShapesArray.length; i++){
+        step ++
+        if (currentStep < step && animate){
+            return graphLC
+        }
         fromPoint = allPointsFromShapesArray[i]
         resssLC = visibleVertices(polygonsArray, fromPoint)[1]
         graphLC.addLC(resssLC)

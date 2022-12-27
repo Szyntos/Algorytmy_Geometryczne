@@ -32,58 +32,60 @@ function setup() {
   fromPointIndex = 9+6;
   fromPointFromMouseSwitch = 0;
   computeGraphSwitch = 0;
+  stepbystepgraph = 0
+  graphanimationswitch = 0;
   frameRate(fr);
   // noLoop()
   createCanvas(w, h);
   create_border(border, 1);
-  button_add = createButton("nextPoint");
+  button_add = createButton("Następny Punkt");
   button_add.position(0, height - border);
   button_add.mousePressed(nextFromPoint);
-  button_add.size(w / 10, border);
-  button_add_lines = createButton("PointMouse");
+  button_add.size(w / 10, border+10);
+  button_add_lines = createButton("Punkt z Myszki");
   button_add_lines.position((w / 10) * 1, height - border);
   button_add_lines.mousePressed(fromPointFromMouse);
-  button_add_lines.size(w / 10, border);
-  button_begin_shape = createButton("Add_Shape");
+  button_add_lines.size(w / 10, border+10);
+  button_begin_shape = createButton("Dodaj Figurę");
   button_begin_shape.position((w / 10) * 2, height - border);
   button_begin_shape.mousePressed(BegShape);
-  button_begin_shape.size(w / 10, border);
-  button_clear = createButton("Clear");
+  button_begin_shape.size(w / 10, border+10);
+  button_clear = createButton("Wyczyść Scenę");
   button_clear.position((w / 10) * 3, height - border);
   button_clear.mousePressed(Clear);
-  button_clear.size(w / 10, border);
-  button_saveJS = createButton("Save_Json");
+  button_clear.size(w / 10, border+10);
+  button_saveJS = createButton("Zapisz do Json");
   button_saveJS.position((w / 10) * 4, height - border);
   button_saveJS.mousePressed(saveJson);
-  button_saveJS.size(w / 10, border);
+  button_saveJS.size(w / 10, border+10);
   button_loadJS = createFileInput(handleFile);
   button_loadJS.position((w / 10) * 5, height - border);
-  button_loadJS.size(w / 10, border);
-  button_resetAnim = createButton("Reset_Anim");
+  button_loadJS.size(w / 10, border+10);
+  button_resetAnim = createButton("Reset Animacji");
   button_resetAnim.position((w / 10) * 6, height - border);
   button_resetAnim.mousePressed(resetAnimation);
-  button_resetAnim.size(w / 10, border);
-  button_spawnDataset_and_clear = createButton("Spawn_dataset");
-  button_spawnDataset_and_clear.position((w / 10) * 7, height - border);
-  button_spawnDataset_and_clear.mousePressed(spawnDataset_and_clear);
-  button_spawnDataset_and_clear.size(w / 10, border);
+  button_resetAnim.size(w / 10, border+10);
+  button_animate = createButton("Animacja widoczneW.");
+  button_animate.position((w / 10) * 7, height - border);
+  button_animate.mousePressed(StepSwitch);
+  button_animate.size(w / 10, border+10);
   textSize(20);
-  button_SwitchIntCheck = createButton("SwitchIntCheck");
+  button_SwitchIntCheck = createButton("Poprzedni Krok");
   button_SwitchIntCheck.position((w / 10) * 8, height - border);
-  button_SwitchIntCheck.mousePressed(SwitchIntCheck);
-  button_SwitchIntCheck.size(w / 10, border);
-  button_step = createButton("stepplus");
+  button_SwitchIntCheck.mousePressed(stepminus);
+  button_SwitchIntCheck.size(w / 10, border+10);
+  button_step = createButton("Następny Krok");
   button_step.position((w / 10) * 9, height - border);
   button_step.mousePressed(stepplus);
-  button_step.size(w / 10, border);
-  button_animate = createButton("Animate");
-  button_animate.position((w / 10) * 10, height - border);
-  button_animate.mousePressed(StepSwitch);
-  button_animate.size(w / 10, border);
-  button_VisGraph = createButton("ComputeVG");
+  button_step.size(w / 10, border+10);
+  button_spawnDataset_and_clear = createButton("Animacja Grafu");
+  button_spawnDataset_and_clear.position((w / 10) * 10, height - border);
+  button_spawnDataset_and_clear.mousePressed(StepSwitchGraph);
+  button_spawnDataset_and_clear.size(w / 10, border+10);
+  button_VisGraph = createButton("Oblicz Graf Widoczności");
   button_VisGraph.position((w / 10) * 11, height - border);
   button_VisGraph.mousePressed(computeGraph);
-  button_VisGraph.size(w / 10, border);
+  button_VisGraph.size(w / 10, border+10);
   textAlign(CENTER, CENTER);
   if (file&& load) {
     scene = new Scene(file);
@@ -138,7 +140,23 @@ function draw_scene(s) {
           }  
       }
     if (allPointsFromShapesArray.length > 2){
-      if (computeGraphSwitch == 1){
+      if (stepbystepgraph == 1){
+        
+        if (graphanimationswitch){
+          fromPoint = allPointsFromShapesArray[sstep % (allPointsFromShapesArray.length)]
+          toAdd = visibleVertices(s.getShapes(), fromPoint)[1]
+          visibleVertices(s.getShapes(), fromPoint)[1].draw("GraphAnimation")
+          alreadyInScene = s.getAddedLC()
+          alreadyInScene = alreadyInScene.concat(toAdd)
+          s.replaceAddedLC(alreadyInScene)
+
+          graphanimationswitch = 0
+        }
+        
+      }else if (stepbystepgraph == 2){
+        s.replaceAddedLC([])
+        stepbystepgraph = 0;
+      }else if (computeGraphSwitch == 1){
         if (s.getAddedLC().length > 0){
           s.getAddedLC()[0] = visibilityGraph(polygonsArray)
         }else{
@@ -177,7 +195,10 @@ function draw_scene(s) {
   }
   for (let i = 0; i < s.getAddedLC().length; i++) {
     drawWhileAddingLines(s.getAddedLC())
-    s.getAddedLC()[i].draw("greenalpha");
+    if (s.getAddedLC()[i]){
+      s.getAddedLC()[i].draw("greenalpha");
+    }
+    
   }
   
 }

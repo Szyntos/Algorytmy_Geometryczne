@@ -153,7 +153,7 @@ class Line {
       return
     }
     if (size == "intersectingEdge"){
-      stroke("rgba(150,130,130, 0.5)");
+      stroke("rgba(150,130,130, 0.9)");
       strokeWeight(10);
       line(this.p1.x, this.p1.y, this.p2.x, this.p2.y);
       stroke(default_stroke);
@@ -246,7 +246,7 @@ class PointsCollection {
     // noStroke();
     beginShape();
     // #00F6FF8E
-    fill("rgba(	0, 246, 255, 0.2)");
+    fill("rgba(	0, 246, 255, 0.1)");
     for (let i = 0; i < this.pointsArray.length; i++) {
       this.pointsArray[i].toVertex();
     }
@@ -318,10 +318,17 @@ class LinesCollection {
   draw(strokeW) {
     if (strokeW == "greenalpha"){
       strokeWeight(1);
-      stroke("rgba(0,204,0, 0.7)")
+      stroke("rgba(0,140,0, 0.9)")
       for (let i = 0; i < this.linesArray.length; i++) {
         this.linesArray[i].draw();
       }
+    }else if (strokeW == "GraphAnimation"){
+      strokeWeight(6);
+      stroke("rgba(150,140,150, 0.9)")
+      for (let i = 0; i < this.linesArray.length; i++) {
+        this.linesArray[i].draw();
+      }
+
     }else if (strokeW == "animation"){
       strokeWeight(5);
       stroke("rgba(0,204,209, 0.5)")
@@ -409,7 +416,7 @@ class Shape {
     strokeWeight(strokeW);
     beginShape();
     // #00F6FF8E
-    fill("rgba(255, 0, 255, 0.3)");
+    fill("rgba(255, 0, 255, 0.1)");
     for (let i = 0; i < this.PC.getArray().length; i++) {
       this.PC.getArray()[i].toVertex();
     }
@@ -485,5 +492,8 @@ class Scene {
   }
   getAddedLC() {
     return this.addedLC;
+  }
+  replaceAddedLC(newAddedLC) {
+    this.addedLC = newAddedLC;
   }
 }
