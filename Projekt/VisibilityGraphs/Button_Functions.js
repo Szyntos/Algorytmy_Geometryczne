@@ -154,11 +154,11 @@ function StepSwitchGraph() {
 
 function stepplus() {
   sstep++;
+  graphsstep++;
   graphanimationswitch = 1
 }
 function stepminus() {
   sstep--;
-  graphanimationswitch = 1
 }
 
 function graphsTime() {

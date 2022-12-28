@@ -38,6 +38,7 @@ function setup() {
   graphanimationswitch = 0;
   lastFrame = 0;
   graphsTimeCheck = 0;
+  graphsstep = 0;
   frameRate(fr);
   // noLoop()
   createCanvas(w, h);
@@ -192,7 +193,7 @@ function draw_scene(s) {
       }
     if (allPointsFromShapesArray.length > 2){
       if (stepbystepgraph == 1){
-        fromPoint = allPointsFromShapesArray[sstep % (allPointsFromShapesArray.length)]
+        fromPoint = allPointsFromShapesArray[graphsstep % (allPointsFromShapesArray.length)]
         toAdd = visibleVertices(s.getShapes(), fromPoint)[1]
         if (lastFrame + 10 > frameCount){
           visibleVertices(s.getShapes(), fromPoint)[1].draw("GraphAnimation")
