@@ -224,6 +224,7 @@ class PointsCollection {
         strokeWeight(2);
         fill(255);
         text("Y-Monotonic", this.pointsArray[0].x, this.pointsArray[0].y + 15);
+        fill(default_fill)
       }
     } else if (this.type == "not_monotonic") {
       stroke(0);
@@ -234,6 +235,7 @@ class PointsCollection {
         this.pointsArray[0].x,
         this.pointsArray[0].y + 15
       );
+      fill(default_fill)
     }
     strokeWeight(default_stroke_weight);
     stroke(default_stroke)
@@ -251,6 +253,7 @@ class PointsCollection {
       this.pointsArray[i].toVertex();
     }
     endShape(CLOSE);
+    fill(default_fill)
   }
 }
 
@@ -421,6 +424,7 @@ class Shape {
       this.PC.getArray()[i].toVertex();
     }
     endShape(CLOSE);
+    fill(default_fill)
   }
 }
 

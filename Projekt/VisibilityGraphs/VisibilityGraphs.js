@@ -324,10 +324,10 @@ function orientationCheck(poly){
     for (let i = 0; i < points.length; i++){
         tmp = points[i].getPayload()
         if (tmp.length < 4){
-            tmp.push(i)
+            tmp.push([i, null])
             points[i].setPayload(tmp)
         }else{
-            tmp[3] = i
+            tmp[3] = [i, tmp[3][1]]
             points[i].setPayload(tmp)
         }
         
@@ -399,7 +399,7 @@ function isPointInsidePolygon(polyIndex, p){
 
 function intersectsInterior(pivot, broom, orientations){
     if (pivot.payload[0] == broom.p2.payload[0]){
-        poly = scene.getShapes()[pivot.payload[0]]
+        poly = scene.getShapes()[broom.p2.payload[0]]
         points = poly.getPC().getArray();
         if (points.length < 3 || scene.getShapes()[broom.p2.payload[0]].getPC().getArray().length < 3){
             return false
@@ -409,8 +409,8 @@ function intersectsInterior(pivot, broom, orientations){
             return false
         }else if (orientations[pivot.payload[0]] == 1){
             // Clockwise
-            edge1 = new Line(points[(broom.p2.payload[3]-1+points.length)% points.length], broom.p2)
-            edge2 = new Line(broom.p2, points[(broom.p2.payload[3]+1)% points.length])
+            edge1 = new Line(points[(broom.p2.payload[3][0]-1+points.length)% points.length], broom.p2)
+            edge2 = new Line(broom.p2, points[(broom.p2.payload[3][0]+1)% points.length])
             if (isTheSameLine(edge1, broom) || isTheSameLine(edge2, broom)){
                 return false
             }
@@ -474,8 +474,8 @@ function intersectsInterior(pivot, broom, orientations){
             }
         }else{
             // Counter
-            edge1 = new Line(points[(broom.p2.payload[3]+1)% points.length], broom.p2)
-            edge2 = new Line(broom.p2, points[(broom.p2.payload[3]-1+points.length)% points.length])
+            edge1 = new Line(points[(broom.p2.payload[3][0]+1)% points.length], broom.p2)
+            edge2 = new Line(broom.p2, points[(broom.p2.payload[3][0]-1+points.length)% points.length])
             if (isTheSameLine(edge1, broom) || isTheSameLine(edge2, broom)){
                 return false
             }
@@ -994,6 +994,50 @@ function visibilityGraph(polygonsArray, animate = 0, currentStep = 0){
         fromPoint = allPointsFromShapesArray[i]
         resssLC = visibleVertices(polygonsArray, fromPoint)[1]
         graphLC.addLC(resssLC)
+    }
+    return graphLC
+}
+
+function visibilityGraphNaive(polygonsArray, animate = 0, currentStep = 0){
+    step = 0
+    allPointsFromShapesArray = []    
+    edgesFromPolygons = []
+    polygonsOrientation = []
+    for (let i = 0; i < polygonsArray.length; i++){
+        polygon = polygonsArray[i]
+        if (polygon.getPC().getArray().length > 1){
+            polygonsOrientation.push(orientationCheck(polygon))
+            points = polygon.getPC().getArray()
+            edges = polygon.getLC().getArray()
+            for (let j = 0; j < points.length; j++){
+              allPointsFromShapesArray.push(points[j])
+            }
+            for (let j = 0; j < edges.length; j++){
+                edgesFromPolygons.push(edges[j])
+            }
+          }  
+      }
+    graphLC = new LinesCollection()
+    for (let i = 0; i < allPointsFromShapesArray.length; i++){
+        for (let j = 0; j < allPointsFromShapesArray.length; j++){
+            if (i != j){
+                flag = 0
+                edgeIJ = new Line(allPointsFromShapesArray[i], allPointsFromShapesArray[j])
+                for (let k = 0; k < edgesFromPolygons.length; k++){
+                        
+                    if (LineIntersection(edgesFromPolygons[k], edgeIJ, "checkBoundaries")[0] || intersectsInterior(edgeIJ.p1, edgeIJ, polygonsOrientation)){
+                        flag = 1
+                        break;
+                    }
+                    // dla i-tego wierzchołka sprawdzamy, czy odcinek i-j jest przecinany przez krawędź k, jeśli nie, to dodajemy krawedz
+                    
+                }
+                if (flag == 0){
+                    graphLC.push(edgeIJ.p1, edgeIJ.p2)
+                }
+            }
+            
+        }
     }
     return graphLC
 }

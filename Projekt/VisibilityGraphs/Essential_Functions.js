@@ -1,9 +1,9 @@
-function create_border(width_of_border, setup) {
+function create_border(width_of_border, setup, bg = 100) {
   if (setup == 1) {
     resizeCanvas(width + 2 * width_of_border, height + 2 * width_of_border);
   }
 
-  background(100);
+  background(bg);
   fill(255);
 
   rect(
