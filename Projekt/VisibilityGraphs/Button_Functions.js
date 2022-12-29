@@ -73,7 +73,7 @@ function handleFileTXT(file) {
     for (let j = 0; j < differentShapesPoints[i].length; j++){
       points = differentShapesPoints[i][j].split(" ")
       scene
-          .getShapes()[scene.getShapes().length - 1].pushPoint(new Point(points[0], points[1]));
+          .getShapes()[scene.getShapes().length - 1].pushPoint(new Point(float(points[0]), float(points[1])));
     }
   }
   
