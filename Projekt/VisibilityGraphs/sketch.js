@@ -31,7 +31,7 @@ function setup() {
   triangulationSwitch = 1;
   IntersectionCheck = 1;
   stepbystep = 0;
-  fromPointIndex = 9+6;
+  fromPointIndex = 0;
   fromPointFromMouseSwitch = 0;
   computeGraphSwitch = 0;
   stepbystepgraph = 0
@@ -221,7 +221,7 @@ function draw_scene(s) {
           // s.getAddedLC()[0].draw("greenalpha")
         }
         graphStop = Date.now()
-        alert("Ilość połączeń w grafie widoczności: " + s.getAddedLC()[0].getArray().length/2)
+        alert("Ilość połączeń w grafie widoczności: " + Math.floor(s.getAddedLC()[0].getArray().length/2))
         
         if (graphsTimeCheck){
           graphNaiveStart = Date.now()

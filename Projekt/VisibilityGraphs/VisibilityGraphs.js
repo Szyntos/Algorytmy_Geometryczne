@@ -726,6 +726,8 @@ function visibleVertices(polygonsArray, fromPoint, animate = 0, currentStep = 0)
     //         console.log("ten sam punkt")
     //         console.log(pointsFromPolygons[i].x)
     //         console.log(pointsFromPolygons[i].y)
+    //     }else {
+    //         console.log("git")
     //     }
     // }
     pointNextToFromPoint = pointsFromPolygons[nextToIndex]
@@ -919,7 +921,12 @@ function visibleVertices(polygonsArray, fromPoint, animate = 0, currentStep = 0)
                     sadsada = 2
                 }
             }
+            todelete1 = 0
+            if (resRem1 == null){
+                todelete1 = 1
+            }
         }
+        
         if (edge2Direction >= 0){
             resRem2 = T.remove(edge2, broom)
             if (resRem2 == null){
@@ -929,35 +936,75 @@ function visibleVertices(polygonsArray, fromPoint, animate = 0, currentStep = 0)
                     sadsada = 2
                 }
             }
+            todelete2 = 0
+            if (resRem2 == null){
+                todelete2 = 1
+            }
         }
+        
         if (edge1Direction < 0){
-            if (BroomIntersection(edge1, newBroom)[0]){
+            if (BroomIntersection(edge1, newBroom)[0] || 1){
                 resIns1 = T.insert(edge1, edge1, newBroom)
             }
             
         }
         if (edge2Direction < 0){
-            if (BroomIntersection(edge2, newBroom)[0]){
+            if (BroomIntersection(edge2, newBroom)[0] || 1){
                 resIns2 = T.insert(edge2, edge2, newBroom)
             }
         }
-        if (edge1Direction >= 0){
+        if (edge1Direction >= 0 && todelete1){
             resRem1 = T.remove(edge1, broom)
             if (resRem1 == null){
                 resRem1 = T.remove(edge1, newBroom)
                 if (resRem1 == null){
                     resRem1 = T.remove(edge1, prevBroom)
-                    sadsada = 2
+                    if (resRem1 == null && edge1Direction != 0){
+                        edges = T.values()
+                        T.destroy()
+                        f = 0
+                        for (let k = 0; k < edges.length; k++){
+                            if (edges[k] != edge1){
+                                T.insert(edges[k], edges[k], newBroom)
+                            }else{
+                                f = 1
+                            }
+                            
+                        }
+                        // if (f){
+                        //     console.log("jest, a nie susunelo")
+                        // }else{
+                        //     console.log("nie ma czego usuwac")
+                        // }
+                    }
+
                 }
             }
         }
-        if (edge2Direction >= 0){
+        if (edge2Direction >= 0 && todelete2){
             resRem2 = T.remove(edge2, broom)
             if (resRem2 == null){
                 resRem2 = T.remove(edge2, newBroom)
                 if (resRem2 == null){
                     resRem2 = T.remove(edge2, prevBroom)
-                    sadsada = 2
+                    if (resRem2 == null && edge2Direction != 0){
+                        edges = T.values()
+                        T.destroy()
+                        f = 0
+                        for (let k = 0; k < edges.length; k++){
+                            if (edges[k] != edge2){
+                                T.insert(edges[k], edges[k], newBroom)
+                            }else{
+                                f = 1
+                            }
+                            
+                        }
+                        // if (f){
+                        //     console.log("jest, a nie susunelo")
+                        // }else{
+                        //     console.log("nie ma czego usuwac")
+                        // }
+                    }
                 }
             }
         }
