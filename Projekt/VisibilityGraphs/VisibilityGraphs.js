@@ -315,7 +315,7 @@ function comparatorT(a, b, x = -1) {
 
 
 function orientationCheck(poly){
-    points = polygon.getPC().getArray()
+    points = poly.getPC().getArray()
     if (points.length < 3){
         return 0
     }
@@ -689,14 +689,14 @@ function visibleVertices(polygonsArray, fromPoint, animate = 0, currentStep = 0)
             polygonsOrientation.push(orientationCheck(polygon))
 
             points = polygon.getPC().getArray()
-            // if (polygonsOrientation[i] == 1){
-            //     text("CLOCKWISE", points[0].x, points[0].y)
-            // }else if (polygonsOrientation[i] == -1){
-            //     text("COUNTERCLOCKWISE", points[0].x, points[0].y)
-            // }else{
-            //     console.log("ASSSSSSSSSS")
-            //     text("tuturutuniewiadomo", points[0].x, points[0].y)
-            // }
+            if (polygonsOrientation[i] == 1){
+                text("CLOCKWISE", points[0].x, points[0].y)
+            }else if (polygonsOrientation[i] == -1){
+                text("COUNTERCLOCKWISE", points[0].x, points[0].y)
+            }else{
+                console.log("ASSSSSSSSSS")
+                text("tuturutuniewiadomo", points[0].x, points[0].y)
+            }
             // console.log()
             
             edges = polygon.getLC().getArray()
@@ -710,6 +710,8 @@ function visibleVertices(polygonsArray, fromPoint, animate = 0, currentStep = 0)
             for (let j = 0; j < edges.length; j++){
                 edgesFromPolygons.push(edges[j])
             }
+        }else{
+            polygonsOrientation.push(0)
         }
     }
 
