@@ -689,14 +689,14 @@ function visibleVertices(polygonsArray, fromPoint, animate = 0, currentStep = 0)
             polygonsOrientation.push(orientationCheck(polygon))
 
             points = polygon.getPC().getArray()
-            if (polygonsOrientation[i] == 1){
-                text("CLOCKWISE", points[0].x, points[0].y)
-            }else if (polygonsOrientation[i] == -1){
-                text("COUNTERCLOCKWISE", points[0].x, points[0].y)
-            }else{
-                console.log("ASSSSSSSSSS")
-                text("tuturutuniewiadomo", points[0].x, points[0].y)
-            }
+            // if (polygonsOrientation[i] == 1){
+            //     text("CLOCKWISE", points[0].x, points[0].y)
+            // }else if (polygonsOrientation[i] == -1){
+            //     text("COUNTERCLOCKWISE", points[0].x, points[0].y)
+            // }else{
+            //     console.log("ASSSSSSSSSS")
+            //     text("tuturutuniewiadomo", points[0].x, points[0].y)
+            // }
             // console.log()
             
             edges = polygon.getLC().getArray()
