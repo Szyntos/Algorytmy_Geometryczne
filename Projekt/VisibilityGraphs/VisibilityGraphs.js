@@ -223,7 +223,6 @@ function isPointOnLine(p, l1){
 }
 
 function LineIntersection(l1, l2, type = "checkBoundaries"){
-    // type = "checkBoundaries" / "noBoundaries" / "infiniteBroom"
     eps = 0.0000000001
     p = LineIntersectionThatOutputsPoint(l1, l2)
     if (isTheSameLine(l1, l2)){
@@ -310,8 +309,6 @@ function comparatorT(a, b, x = -1) {
     }
 
 }
-
-// Payload = [polygon, edge, index]
 
 
 function orientationCheck(poly){
@@ -408,7 +405,6 @@ function intersectsInterior(pivot, broom, orientations){
         if (orientations[pivot.payload[0]] == 0){
             return false
         }else if (orientations[pivot.payload[0]] == 1){
-            // Clockwise
             edge1 = new Line(points[(broom.p2.payload[3][0]-1+points.length)% points.length], broom.p2)
             edge2 = new Line(broom.p2, points[(broom.p2.payload[3][0]+1)% points.length])
             if (isTheSameLine(edge1, broom) || isTheSameLine(edge2, broom)){
@@ -473,7 +469,6 @@ function intersectsInterior(pivot, broom, orientations){
                 return true
             }
         }else{
-            // Counter
             edge1 = new Line(points[(broom.p2.payload[3][0]+1)% points.length], broom.p2)
             edge2 = new Line(broom.p2, points[(broom.p2.payload[3][0]-1+points.length)% points.length])
             if (isTheSameLine(edge1, broom) || isTheSameLine(edge2, broom)){
@@ -537,37 +532,9 @@ function intersectsInterior(pivot, broom, orientations){
                 return false
             }
         }
-        // if (det(edge1.p1, edge1.p2, pivot, 1) == 1 && det(edge2.p1, edge2.p2, pivot, 1) == 1){
-        //     return true
-        // }
-        // if (det(edge1.p1, edge1.p2, pivot, 1) == -1 && det(edge2.p1, edge2.p2, pivot, 1) == -1){
-        //     return false
-        // }
-        
         return false
     }
     return false
-
-
-
-
-
-    // Stare
-    // if (pivot.payload[0] == broom.p2.payload[0]){
-    //     poly = scene.getShapes()[pivot.payload[0]]
-    //     edges = poly.getLC().getArray();
-    //     for (let i = 0; i < edges.length; i++){
-    //         if ((edges[i].p1.x == broom.p1.x && edges[i].p1.y == broom.p1.y && 
-    //             edges[i].p2.x == broom.p2.x && edges[i].p2.y == broom.p2.y) ||
-    //             (edges[i].p1.x == broom.p2.x && edges[i].p1.y == broom.p2.y && 
-    //             edges[i].p2.x == broom.p1.x && edges[i].p2.y == broom.p1.y)){
-    //                 return false
-    //             }
-    //     }
-    //     halfpoint = new Point((pivot.x+broom.p2.x)/2, (pivot.y + broom.p2.y)/2)
-    //     return isPointInsidePolygon(pivot.payload[0], halfpoint)
-    // }
-    // return false
 }
 
 function visible(broom, checkedPoint, sortedPointsArray, tree, visiblePoints, orientations, animate=0, currentStep=0){
@@ -576,42 +543,6 @@ function visible(broom, checkedPoint, sortedPointsArray, tree, visiblePoints, or
         return false
     }else if (checkedPoint.payload[2] == 0 || 
         det(broom.p1, broom.p2, sortedPointsArray[checkedPoint.payload[2]-1], 1) != 0){
-            // pokazujemy minimalną krawędź i czy się przecina
-            // potentialEdge = tree.findMin(broom)
-            // if (potentialEdge != null){
-            //     potentialEdge = potentialEdge.key
-            //     step ++
-            //     if (currentStep < step && animate){
-            //         potentialEdge.draw("minimalEdge")
-            //         broom.draw("animation")
-            //         array = Array.from(visiblePoints)
-            //         PC = new PointsCollection()
-            //         LC = new LinesCollection()
-            //         for (let i = 0; i < array.length; i++){
-            //             LC.push(fromPoint, array[i])
-            //         }
-            //         PC.pushArray(array)
-            //         return ["return", PC, LC]
-            //     }
-            //     if (LineIntersection(potentialEdge, broom, "checkBoundaries")[0]){
-            //         step ++
-            //         if (currentStep < step && animate){
-            //             LineIntersectionThatOutputsPoint(potentialEdge, broom).draw("intersection")
-            //             potentialEdge.draw("minimalEdge")
-            //             broom.draw("animation")
-            //             array = Array.from(visiblePoints)
-            //             PC = new PointsCollection()
-            //             LC = new LinesCollection()
-            //             for (let i = 0; i < array.length; i++){
-            //                 LC.push(fromPoint, array[i])
-            //             }
-            //             PC.pushArray(array)
-            //             return ["return", PC, LC]
-            //         }
-            //         // jak jest przecięcie to pokazujemy punkt
-            //         return false
-            //     }
-            // }
             potentialEdge = tree.min()
             
             if (potentialEdge != null){
@@ -664,7 +595,6 @@ function visible(broom, checkedPoint, sortedPointsArray, tree, visiblePoints, or
         edgesOnTree = tree.values()
         for (let i = 0; i < edgesOnTree.length; i++){
             if (LineIntersection(edgesOnTree[i], edgeFromPreviousPoint)[0]){
-                // jeśli się przecina to linie i punkt
                 return false
             }
         }
@@ -689,16 +619,6 @@ function visibleVertices(polygonsArray, fromPoint, animate = 0, currentStep = 0)
             polygonsOrientation.push(orientationCheck(polygon))
 
             points = polygon.getPC().getArray()
-            // if (polygonsOrientation[i] == 1){
-            //     text("CLOCKWISE", points[0].x, points[0].y)
-            // }else if (polygonsOrientation[i] == -1){
-            //     text("COUNTERCLOCKWISE", points[0].x, points[0].y)
-            // }else{
-            //     console.log("ASSSSSSSSSS")
-            //     text("tuturutuniewiadomo", points[0].x, points[0].y)
-            // }
-            // console.log()
-            
             edges = polygon.getLC().getArray()
             for (let j = 0; j < points.length; j++){
                 if (points[j]!=fromPoint){
@@ -714,25 +634,7 @@ function visibleVertices(polygonsArray, fromPoint, animate = 0, currentStep = 0)
             polygonsOrientation.push(0)
         }
     }
-
-    // for (let i = 0; i < pointsFromPolygons.length; i++){
-    //     flag = 0
-    //     for (let j = 0; j < pointsFromPolygons.length; j++){
-    //         if (pointsFromPolygons[i].x == pointsFromPolygons[j].x && pointsFromPolygons[i].y == pointsFromPolygons[j].y){
-    //             flag++
-    //         }
-    //     }
-    //     if (flag > 1){
-    //         console.log("ten sam punkt")
-    //         console.log(pointsFromPolygons[i].x)
-    //         console.log(pointsFromPolygons[i].y)
-    //     }else {
-    //         console.log("git")
-    //     }
-    // }
     pointNextToFromPoint = pointsFromPolygons[nextToIndex]
-
-    // pokazujemy wszystkie punkty wielokątów\
     step ++
     if (currentStep < step && animate){
         for (let i = 0; i < pointsFromPolygons.length; i++){
@@ -742,15 +644,12 @@ function visibleVertices(polygonsArray, fromPoint, animate = 0, currentStep = 0)
         LC = new LinesCollection()
         return [PC, LC]
     }
-    
-    // potem znikają
     step ++
     if (currentStep < step && animate){
         PC = new PointsCollection()
         LC = new LinesCollection()
         return [PC, LC]
     }
-    // piszemy numerki przed posortowaniem
     step ++
     if (currentStep < step && animate){
         for (let i = 0; i < pointsFromPolygons.length; i++){
@@ -765,11 +664,6 @@ function visibleVertices(polygonsArray, fromPoint, animate = 0, currentStep = 0)
     for (let i = 0; i < sortedPointsArray.length; i++){
         sortedPointsArray[i].setIndex(i)
     }
-    
-
-    
-    
-    // piszemy numerki po posortowaniu
     step ++
     if (currentStep < step && animate){
         for (let i = 0; i < sortedPointsArray.length; i++){
@@ -779,7 +673,6 @@ function visibleVertices(polygonsArray, fromPoint, animate = 0, currentStep = 0)
         LC = new LinesCollection()
         return [PC, LC]
     }
-    // numerki znikają 
     step ++
     if (currentStep < step && animate){
         PC = new PointsCollection()
@@ -800,8 +693,6 @@ function visibleVertices(polygonsArray, fromPoint, animate = 0, currentStep = 0)
         nextIndex++
         newBroom = new Line(fromPoint, sortedPointsArray[(nextIndex)%sortedPointsArray.length])
     }
-    
-    // pokazujemy pierwszą miotłe
     step ++
     if (currentStep < step && animate){
         broom.draw("animation")
@@ -814,8 +705,6 @@ function visibleVertices(polygonsArray, fromPoint, animate = 0, currentStep = 0)
             T.insert(edgesFromPolygons[i], edgesFromPolygons[i], newBroom)
         }
     }
-    
-    // pokazujemy rzeczy znalezione na miotle
     step ++
     if (currentStep < step && animate){
         edges = T.values()
@@ -828,7 +717,6 @@ function visibleVertices(polygonsArray, fromPoint, animate = 0, currentStep = 0)
         return [PC, LC]
     }
     for (let i = 0; i < sortedPointsArray.length; i++){
-        // CAŁY CZAS STAN DRZEWA WYŚWIETLONY
         broom = new Line(fromPoint, sortedPointsArray[i])
         step ++
         if (currentStep < step && animate){
@@ -851,7 +739,6 @@ function visibleVertices(polygonsArray, fromPoint, animate = 0, currentStep = 0)
             return [visibilityResult[1], visibilityResult[2]]
         }
         if (visibilityResult){
-            // pokazujemy że dodaliśmy 
             step ++
             if (currentStep < step && animate){
                 edges = T.values()
@@ -962,20 +849,11 @@ function visibleVertices(polygonsArray, fromPoint, animate = 0, currentStep = 0)
                     if (resRem1 == null && edge1Direction != 0){
                         edges = T.values()
                         T.destroy()
-                        f = 0
                         for (let k = 0; k < edges.length; k++){
                             if (edges[k] != edge1){
                                 T.insert(edges[k], edges[k], newBroom)
-                            }else{
-                                f = 1
                             }
-                            
                         }
-                        // if (f){
-                        //     console.log("jest, a nie susunelo")
-                        // }else{
-                        //     console.log("nie ma czego usuwac")
-                        // }
                     }
 
                 }
@@ -990,20 +868,12 @@ function visibleVertices(polygonsArray, fromPoint, animate = 0, currentStep = 0)
                     if (resRem2 == null && edge2Direction != 0){
                         edges = T.values()
                         T.destroy()
-                        f = 0
                         for (let k = 0; k < edges.length; k++){
                             if (edges[k] != edge2){
                                 T.insert(edges[k], edges[k], newBroom)
-                            }else{
-                                f = 1
                             }
                             
                         }
-                        // if (f){
-                        //     console.log("jest, a nie susunelo")
-                        // }else{
-                        //     console.log("nie ma czego usuwac")
-                        // }
                     }
                 }
             }
@@ -1077,9 +947,7 @@ function visibilityGraphNaive(polygonsArray, animate = 0, currentStep = 0){
                     if (LineIntersection(edgesFromPolygons[k], edgeIJ, "checkBoundaries")[0] || intersectsInterior(edgeIJ.p1, edgeIJ, polygonsOrientation)){
                         flag = 1
                         break;
-                    }
-                    // dla i-tego wierzchołka sprawdzamy, czy odcinek i-j jest przecinany przez krawędź k, jeśli nie, to dodajemy krawedz
-                    
+                    }                    
                 }
                 if (flag == 0){
                     graphLC.push(edgeIJ.p1, edgeIJ.p2)
